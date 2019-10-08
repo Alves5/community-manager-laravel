@@ -1,0 +1,9 @@
+#row{
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+}
+#row > #copyright{
+    position: relative;
+    text-align: center;
+}

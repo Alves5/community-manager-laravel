@@ -20,4 +20,8 @@
         </div>
     </div>
 </div>
+
+<footer id="row">
+    @include('layouts.footer')
+</footer>
 @endsection
