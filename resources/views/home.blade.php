@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                <a href="{{url('/biodata')}}">Inserir Pessoas</a>
                 </div>
             </div>
         </div>

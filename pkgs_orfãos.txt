@@ -1,0 +1,13 @@
+cabextract
+farstream
+gmime
+gnu-netcat
+icoutils
+jq
+libdv
+libgadu
+libmp4v2
+libmypaint
+libquvi
+python2-wxpython3
+wine

@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Biodata;
 
-class PessoasController extends Controller
+class BiodataController extends Controller
 {
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +17,9 @@ class PessoasController extends Controller
      */
     public function index()
     {
-        //
+        $biodatas =  Biodata::latest()->paginate(5);
+        return view('biodata.index', compact('biodatas'))
+                ->with('i', (request()->input('page', 1) -1)*5);
     }
 
     /**
@@ -23,7 +29,7 @@ class PessoasController extends Controller
      */
     public function create()
     {
-        //
+        return view('biodata.create');
     }
 
     /**
@@ -34,7 +40,13 @@ class PessoasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nome' => 'required',
+            'celular' => 'required'
+        ]);
+        Biodata::create($request->all());
+        return redirect()->route('biodata.index')
+                ->with('success', 'Nova pessoa adicionada!');
     }
 
     /**
@@ -45,7 +57,8 @@ class PessoasController extends Controller
      */
     public function show($id)
     {
-        //
+        $biodata = Biodata::find($id);
+        return view('biodata.detail', compact('biodata'));
     }
 
     /**
@@ -56,7 +69,8 @@ class PessoasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $biodata = Biodata::find($id);
+        return view('biodata.edit', compact('biodata'));
     }
 
     /**
@@ -68,7 +82,16 @@ class PessoasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nome' => 'required',
+            'celular' => 'required'
+        ]);
+        $biodata = Biodata::find($id);
+        $biodata->nome = $request->get('nome');
+        $biodata->celular = $request->get('celular');
+        $biodata->save();
+        return redirect()->route('biodata.index')
+                ->with('success', 'Os dados foram atualizados!');
     }
 
     /**
@@ -79,6 +102,9 @@ class PessoasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $biodata = Biodata::find($id);
+        $biodata->delete();
+        return redirect()->route('biodata.index')
+                ->with('success', 'A pessoa foi removida!');
     }
 }
