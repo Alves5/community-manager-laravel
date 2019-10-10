@@ -22,6 +22,10 @@
                             <i class="fas fa-book"></i>
                             <a href="{{url('/livro')}}">Inserir Livros</a>
                         </div>
+                        <div>
+                            <i class="fas fa-rocket"></i>
+                            <a href="{{url('/startup')}}">Inserir Startup</a>
+                        </div>
                     </div>
                 </div>
             </div>

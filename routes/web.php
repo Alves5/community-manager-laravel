@@ -24,3 +24,6 @@ Route::resource('biodata', 'BiodataController');
 
 //Rota básica para definir as funções do CRUD
 Route::resource('livro', 'LivroController');
+
+//Rota para para definir as funções do CRUD
+Route::resource('startup', 'StartupController');
