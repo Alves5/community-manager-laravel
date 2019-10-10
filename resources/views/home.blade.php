@@ -13,8 +13,16 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                <a href="{{url('/biodata')}}">Inserir Pessoas</a>
+                    <div>
+                        <div>
+                            <i class="fas fa-user-plus"></i>
+                            <a href="{{url('/biodata')}}">Inserir Pessoas</a>
+                        </div>
+                        <div>
+                            <i class="fas fa-book"></i>
+                            <a href="{{url('/livro')}}">Inserir Livros</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

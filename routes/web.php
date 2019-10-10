@@ -19,4 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//Rota básica para definir as funções do CRUD
 Route::resource('biodata', 'BiodataController');
+
+//Rota básica para definir as funções do CRUD
+Route::resource('livro', 'LivroController');
