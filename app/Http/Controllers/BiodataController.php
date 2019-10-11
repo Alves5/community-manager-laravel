@@ -9,7 +9,6 @@ class BiodataController extends Controller
 {
 
 
-
     /**
      * Display a listing of the resource.
      *

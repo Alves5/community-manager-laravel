@@ -18,6 +18,7 @@ class CreateStartupsTable extends Migration
             $table->string('nome');
             $table->string('email');
             $table->string('senha');
+            $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
     }

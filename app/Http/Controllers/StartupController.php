@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Startup;
+use App\Rules\Uppercase;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class StartupController extends Controller
 {
@@ -15,7 +15,7 @@ class StartupController extends Controller
      */
     public function index()
     {
-        $startups = Startup::latest()->paginate(5);
+        $startups = Startup::latest()->where('ativo', true)->paginate(5);
         return view('startup.index', compact('startups'))
                 ->with('i', (request()->input('page', 1)-1)*5);
     }
@@ -39,9 +39,9 @@ class StartupController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nome' => 'required|max: 20', 'required|string',
-            'email' => 'required|max: 100', 'email',
-            'senha' => 'required|min: 6', 'string'
+            'nome' => 'required|max: 20',
+            'email' => 'required|email',
+            'senha' => 'required|between:6,12'//Depois colocar o new Uppercase aqui
         ]);
         Startup::create($request->all());
             return redirect()->route('startup.index')
@@ -56,7 +56,7 @@ class StartupController extends Controller
      */
     public function show($id)
     {
-        $startup = Startup::find($id);
+        $startup = Startup::find($id);  
         return view('startup.detail', compact('startup'));
     }
 
@@ -82,9 +82,9 @@ class StartupController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nome' => ['required', 'string', 'max:20'],
-            'email' => ['required', 'string', 'email', 'max:100', 'unique:startup'],
-            'senha' => ['required', 'string', 'min:6', 'max:12', 'confirmed']
+            'nome' => 'required|max: 20',
+            'email' => 'required|email',
+            'senha' => 'required|between:6,12'
         ]);
         $startup = Startup::find($id);
         $startup->nome = $request->get('nome');
@@ -95,8 +95,18 @@ class StartupController extends Controller
                 ->with('success', 'Os dados foram atualizados!');
     }
 
+    //Pegar as informações que vão vir do alert de confirmação
+    public function inativar(Request $request, $id)
+    {
+        $startup = Startup::find($id);
+        $startup->ativo = $request->get('ativo');
+        $startup->save();
+        return redirect()->route('startup.index')
+                ->with('success', 'Startup inativada com sucesso.');
+    }
+
     /**
-     * Remove the specified resource from storage.
+     * Remove uma Startup.
      *
      * @param  \App\Startup  $startup
      * @return \Illuminate\Http\Response
@@ -104,8 +114,9 @@ class StartupController extends Controller
     public function destroy($id)
     {
         $startup = Startup::find($id);
+        $startup->ativo = $request->get('ativo');
         $startup->delete();
         return redirect()->route('startup.index')
-                ->with('success', 'A pessoa foi removida!');
+                ->with('success', 'A startup foi removida.');
     }
 }

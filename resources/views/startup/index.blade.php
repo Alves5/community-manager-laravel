@@ -31,11 +31,15 @@
             <form action="{{ route('startup.destroy', $startup->id) }}" method="post">
               <a class="btn btn-sm btn-success" href="{{route('startup.show',$startup->id)}}">Show</a>
               <a class="btn btn-sm btn-warning" href="{{route('startup.edit',$startup->id)}}">Edit</a>
+              <!-- Criar um alert(SweetAlert) para mostrar mensagem de confirmação de inativação-->
+              <!-- <a class="btn btn-sm btn-warning" href="{{route('startup.inativar',$startup->id)}}">Inativar</a> -->
               @csrf
               @method('DELETE')
-              <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+              <button type="submit" class="btn btn-sm btn-danger">Remover</button>
             </form>
           </td>
+          <!-- Coluna para saber se esta ativo ou não -->
+          <td style='visibility: collapse'>{{$startup->ativo}}</td>
         </tr>
       @endforeach
     </table>

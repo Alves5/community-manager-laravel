@@ -28,15 +28,18 @@
         </div>
         <div class="col-md-12">
           <strong>E-mail :</strong>
-          <input class="form-control" type="email" placeholder="Ex: remediozap@gmail.com" name="email">
+          <input style="text-transform: lowercase;" class="form-control" type="email" placeholder="Ex: remediozap@gmail.com" name="email">
         </div>
         <div class="col-md-12">
           <strong>Senha :</strong>
-          <input class="form-control" type="password" placeholder="Gere uma senha" name="senha">
+          <input style="text-transform: uppercase;" class="form-control" type="text" placeholder="******" name="senha">
+          <small id="emailHelp" class="form-text text-muted">A senha deve conter entre 6 e 12 caracteres.</small>
         </div>
 
         <div class="col-md-12">
             <a href="{{ route('startup.index')}}" class="btn btn-sm btn-success">Voltar</a>
+            <!-- Pode se đazer uma ação com JavaScript para enviar
+            somente se tudo estiver nos conformes -->
           <button type="submit" class="btn btn-sm btn-primary">Enviar</button>
         </div>
       </div>
