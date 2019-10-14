@@ -59,22 +59,29 @@ class StartupController extends Controller
         return redirect()->back();
     }
 
-
-   //Reativa Startup
-    // public function update($id)
-    // {
-    //     $startup = Startup::find($id);
-    //     $startup->ativo = 1;
-    //     $startup->save();
-    //     return redirect()->back();
-    // }
-
-   //Remove Startup
-    public function destroy($id)
-    {
-        $startup = Startup::find($id);
-        $startup->delete();
-        return redirect()->route('startup.index')
-                ->with('success', 'A startup foi removida.');
-    }
+    public function update($tamanho = 6){
+		
+		/* Caracteres permitidos */
+		$caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+		
+		/* Quantidade de indices que o array caracteres tem */
+		$maximo = strlen($caracteres) - 1;
+		
+		/* Inicializa a variavel que ira conter a senha */
+		$senhas = '';
+		
+		/* Percorre o loop de acordo com o tamanho da senha */
+		for($i = 0; $i < $tamanho; $i++){
+		
+			/* Pega uma posicao aleatoria do array de caracteres */
+			$posicao_aleatoria = mt_rand(0, $maximo);
+			
+			/* Obtem o caracterer da posicao aleatoria gerada anteriormente e adiciona a senha */
+			$senhas .= $caracteres[$posicao_aleatoria];
+			
+		}
+		
+        return view('startup.create', compact('senhas'));
+		
+	}
 }

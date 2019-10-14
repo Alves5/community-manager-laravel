@@ -24,9 +24,9 @@
                 <td>{{$startup->senha}}</td>
                 <td>
                   @if($startup->ativo)
-                    <a id='tirar' onclick='startup(0)' class="btn btn-sm btn-warning" href="{{route('startup.show', $startup->id)}}">Inativo</a>
+                    <a onclick='startup({{$startup->id}});' class="btn btn-sm btn-warning" href="javascript:func()">Inativo</a>
                   @else
-                    <a id='tirar' onclick='startup(1)' class="btn btn-sm btn-success" href="{{route('startup.show', $startup->id)}}">Ativo</a>
+                    <a onclick='startup({{$startup->id}});' class="btn btn-sm btn-success" href="javascript:func()">Ativo</a>
                   @endif
                 </td>
               </tr>
@@ -43,4 +43,22 @@
 <footer id="row">
     @include('layouts.footer')
 </footer>
+<script>
+  function startup(id){
+    Swal.fire({
+        title: 'Confirmação:',
+        text: "Você deseja realmente inativar ?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Confirmar'
+      }).then((result) => {
+        if (result.value) {
+          window.location.href = "startup/index/"+id;
+        }
+      })
+      
+}
+</script>
 @endsection

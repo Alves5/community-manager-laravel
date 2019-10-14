@@ -12,3 +12,33 @@
     width: 90%;
     left: 20px;
 }
+#sub-cont{
+    position: relative;
+    margin-top: 30px;
+    left: 10%;
+}
+#form-start{
+    position: relative;
+    width: 880px;
+}
+#title{
+    margin-bottom: 10px;
+}
+.start{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.start > input{
+    width: 700px;
+    height: 40px;
+    border-radius: 20px;
+}
+.start > button{
+    position: relative;
+    bottom: 63px;
+    width: 150px;
+    height: 40px;
+    border-radius: 13px;
+    font-size: 18px;
+    float: right;
+}
