@@ -9,5 +9,3 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-/database/migrations/2019_10_08_193000_create_livros_table.php
-/database/migrations/2019_10_08_193000_create_starts_table.php
