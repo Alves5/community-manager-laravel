@@ -15,7 +15,7 @@ class StartupController extends Controller
      */
     public function index()
     {
-        $startups = Startup::latest()->where('ativo', true)->paginate(5);
+        $startups = Startup::latest()->paginate(5);
         return view('startup.index', compact('startups'))
                 ->with('i', (request()->input('page', 1)-1)*5);
     }
@@ -30,12 +30,7 @@ class StartupController extends Controller
         return view('startup.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   //Adiciona Startup
     public function store(Request $request)
     {
         $request->validate([
@@ -48,73 +43,36 @@ class StartupController extends Controller
                     ->with('success', 'Nova startup adicionada!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Startup  $startup
-     * @return \Illuminate\Http\Response
-     */
+   //Inativa Startup
     public function show($id)
     {
-        $startup = Startup::find($id);  
-        return view('startup.detail', compact('startup'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Startup  $startup
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
         $startup = Startup::find($id);
-        return view('startup.edit', compact('startup'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Startup  $startup
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'nome' => 'required|max: 20',
-            'email' => 'required|email',
-            'senha' => 'required|between:6,12'
-        ]);
-        $startup = Startup::find($id);
-        $startup->nome = $request->get('nome');
-        $startup->email = $request->get('email');
-        $startup->senha = $request->get('senha');
+        if($startup->ativo == 0)
+        {
+            $startup->ativo = 1;
+        }
+        else
+        {
+            $startup->ativo = 0;
+        }
         $startup->save();
-        return redirect()->route('startup.index')
-                ->with('success', 'Os dados foram atualizados!');
+        return redirect()->back();
     }
 
-    //Pegar as informações que vão vir do alert de confirmação
-    public function inativar(Request $request, $id)
-    {
-        $startup = Startup::find($id);
-        $startup->ativo = $request->get('ativo');
-        $startup->save();
-        return redirect()->route('startup.index')
-                ->with('success', 'Startup inativada com sucesso.');
-    }
 
-    /**
-     * Remove uma Startup.
-     *
-     * @param  \App\Startup  $startup
-     * @return \Illuminate\Http\Response
-     */
+   //Reativa Startup
+    // public function update($id)
+    // {
+    //     $startup = Startup::find($id);
+    //     $startup->ativo = 1;
+    //     $startup->save();
+    //     return redirect()->back();
+    // }
+
+   //Remove Startup
     public function destroy($id)
     {
         $startup = Startup::find($id);
-        $startup->ativo = $request->get('ativo');
         $startup->delete();
         return redirect()->route('startup.index')
                 ->with('success', 'A startup foi removida.');
