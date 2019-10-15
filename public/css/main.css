@@ -7,6 +7,42 @@
     position: relative;
     text-align: center;
 }
+
+/* CSS da página de login */
+#login{
+    background-image: url('../image/fundo-login.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+#login-card{
+    position: relative;
+    top: 20%;
+    border-radius: 15px;
+}
+#logo-login{
+    position: relative;
+    top: 10px;
+    width: 120px;
+    height: 70px;
+}
+.login-input > input {
+    width: 330px;
+    height: 40px;
+    border-radius: 20px;
+}
+.login-input > .form-check{
+    font-size: 12px;
+}
+.login-input > .form-check > label{
+    position: relative;
+    top: 2px;
+}
+#login-buttom{
+    background-color: #00ffdc;
+}
+
+/* CSS da página de adicionar Startup */
 .form-inse{
     position: relative;
     width: 90%;
