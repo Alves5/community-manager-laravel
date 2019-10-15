@@ -24,3 +24,7 @@ Route::resource('biodata', 'BiodataController');
 
 //Rota para para definir as funções do CRUD
 Route::resource('startup', 'StartupController');
+
+Route::get('/Recuperar', function(){
+    return view('recuperar.trocarSenha');
+});

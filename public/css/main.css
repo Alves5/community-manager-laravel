@@ -42,3 +42,35 @@
     font-size: 18px;
     float: right;
 }
+
+/* CSS da página de trocar senha */
+#sub-cont-trocar{
+    position: relative;
+    margin-top: 30px;
+    left: 10%;
+}
+#form-start-trocar{
+    position: relative;
+    width: 880px;
+}
+#title-trocar{
+    margin-bottom: 10px;
+}
+.start-trocar{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.start-trocar > input{
+    width: 700px;
+    height: 40px;
+    border-radius: 20px;
+}
+.start-trocar > button{
+    position: relative;
+    bottom: 41px;
+    width: 160px;
+    height: 40px;
+    border-radius: 13px;
+    font-size: 18px;
+    float: right;
+}
