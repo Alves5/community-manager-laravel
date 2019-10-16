@@ -19,20 +19,20 @@
                             <a href="{{url('/biodata')}}">Inserir Pessoas</a>
                         </div>
                         <div>
-                            <i class="fas fa-book"></i>
-                            <a href="{{url('/livro')}}">Inserir Livros</a>
-                        </div>
-                        <div>
                             <i class="fas fa-rocket"></i>
-                            <a href="{{url('/startup')}}">Inserir Startup</a>
+                            <a href="{{url('/startup')}}">Ver Startup</a>
                         </div>
                         <div>
                             <i class="fas fa-key"></i>
                             <a href="{{url('/Recuperar')}}">Página de trocar senha</a>
                         </div>
                         <div>
-                        <i class="fas fa-users"></i>
-                            <a href="{{url('/membro')}}">Membros</a>
+                            <i class="fas fa-users"></i>
+                            <a href="{{url('/membro')}}">Ver Membros</a>
+                        </div>
+                        <div>
+                            <i class="fas fa-users"></i>
+                            <a href="{{url('/dadoMM')}}">Adicionar mentores/membros</a>
                         </div>
                     </div>
                 </div>

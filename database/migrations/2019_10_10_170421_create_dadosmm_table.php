@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStartupsTable extends Migration
+class CreateDadosMMTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,16 @@ class CreateStartupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('startups', function (Blueprint $table) {
+        Schema::create('dadosMM', function (Blueprint $table) {
             $table->increments('id');
+            $table->binary('foto');
             $table->string('nome');
-            $table->string('email');
-            $table->string('senha');
-            $table->tinyInteger('ativo')->default(0);
+            $table->string('dataNasc');
+            $table->string('especializacao');
+            $table->string('telefone');
+            $table->string('endereco');
+            $table->string('redesSociais');
+            $table->string('sobre');
             $table->timestamps();
         });
     }
@@ -30,6 +34,6 @@ class CreateStartupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('startups');
+        Schema::dropIfExists('dadosMM');
     }
 }

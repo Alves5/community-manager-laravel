@@ -29,7 +29,7 @@
     <img style="width: 220px; height: 150px;" src="{{asset('image/logo-bioazul.png')}}" class="rounded">
   </div>
     <div style='margin-bottom: 30px;' class="col-md-12">
-        <a style='position: relative; float: right;' href="{{route('membro.create')}}" class="btn btn-sm btn-success">Adicionar membro</a>
+        <a style='position: relative; float: right;' href="{{ route('register') }}" class="btn btn-sm btn-success">Adicionar membro</a>
     </div>
     <div class='rows'>
         <table class="table table-hover table-dark">
@@ -41,24 +41,10 @@
                   <th scope='col'>Ativo</th>
                 </tr>
             </thead>
-            @foreach ($membros as $membro)
-              <tr>
-                <td>{{++$i}}</td>
-                <td>{{$membro->nome}}</td>
-                <td>{{$membro->email}}</td>
-                <td>
-                  @if($membro->ativo)
-                    <a class="btn btn-sm btn-warning" href="{{route('membro.edit', $membro->id)}}">Inativo</a>
-                  @else
-                    <a class="btn btn-sm btn-success" href="{{route('membro.edit', $membro->id)}}">Ativo</a>
-                  @endif
-                </td>
-              </tr>
-            @endforeach
+           
     </table>
     </div>
 
-    {!! $membros->links() !!}
     <div class="col-md-12">
         <a href="{{url('/home')}}" class="btn btn-sm btn-success">Voltar Home</a>
     </div>
