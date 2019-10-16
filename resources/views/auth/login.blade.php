@@ -77,10 +77,10 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-8 offset-md-4">
+                                <div class="form-group row">
+                                    <div class="col-md-9 offset-md-4">
                                         <button id="login-buttom" type="submit" class="btn btn-primary">
-                                            {{ __('Login') }} <i class="fas fa-chevron-right"></i>
+                                            {{ __('Entrar') }} <i class="fas fa-chevron-right"></i>
                                         </button>
                                     </div>
                                 </div>

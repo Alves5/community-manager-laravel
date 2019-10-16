@@ -23,12 +23,13 @@
 #logo-login{
     position: relative;
     top: 10px;
-    width: 120px;
-    height: 70px;
+    width: 140px;
+    height: 80px;
+    margin: 10px 0 10px 0;
 }
 .login-input > input {
     width: 330px;
-    height: 40px;
+    height: 50px;
     border-radius: 20px;
 }
 .login-input > .form-check{
@@ -36,10 +37,27 @@
 }
 .login-input > .form-check > label{
     position: relative;
-    top: 2px;
+    top: 3px;
+}
+.login-input > .btn-link{
+    position: relative;
+    left: 170px;
+    bottom: 27px;
 }
 #login-buttom{
+    position: relative;
+    left: 5px;
+    margin-top: -10px;
     background-color: #00ffdc;
+    color: #FFFAFA;
+    font-size: 22px;
+    border-radius: 20px;
+    border: 0px;
+}
+#login-buttom > .fas{
+    position: relative;
+    top: 2px;
+    left: 6px;
 }
 
 /* CSS da página de adicionar Startup */

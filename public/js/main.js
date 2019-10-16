@@ -31,7 +31,8 @@ function validarSenhas(){
             }
         }
     }
-    if(valida = true){
+    
+    if(valida == true){
         Swal.fire({
             title: 'Nova senha',
             text: 'A sua senha foi alterada com sucesso.',
