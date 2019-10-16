@@ -25,6 +25,15 @@ Route::resource('biodata', 'BiodataController');
 //Rota para para definir as funções do CRUD
 Route::resource('startup', 'StartupController');
 
+//Rota para a página de trocar senha
 Route::get('/Recuperar', function(){
     return view('recuperar.trocarSenha');
 });
+
+//Rota para a página de adicionar membros
+// Route::get('/Membro', function(){
+//     return view('membro.adicionarMembro');
+// });
+Route::resource('membro', 'MembroController');
+
+

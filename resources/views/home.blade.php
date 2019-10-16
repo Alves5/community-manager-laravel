@@ -27,8 +27,12 @@
                             <a href="{{url('/startup')}}">Inserir Startup</a>
                         </div>
                         <div>
-                        <i class="fas fa-key"></i>
+                            <i class="fas fa-key"></i>
                             <a href="{{url('/Recuperar')}}">Página de trocar senha</a>
+                        </div>
+                        <div>
+                        <i class="fas fa-users"></i>
+                            <a href="{{url('/membro')}}">Membros</a>
                         </div>
                     </div>
                 </div>

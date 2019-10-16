@@ -85,6 +85,9 @@
                                     </div>
                                 </div>
                             </form>
+                            <div>
+                                <a href="{{url('/')}}">Voltar</a>
+                            </div>
                         </div>
 
                 </div>
