@@ -32,7 +32,7 @@
                         </div>
                         <div>
                             <i class="fas fa-users"></i>
-                            <a href="{{url('/dadoMM')}}">Adicionar mentores/membros</a>
+                            <a href="{{url('/dadosMentoresM')}}">Adicionar mentores/membros</a>
                         </div>
                     </div>
                 </div>

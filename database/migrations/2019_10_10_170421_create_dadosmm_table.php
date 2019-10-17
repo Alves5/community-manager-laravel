@@ -15,7 +15,7 @@ class CreateDadosMMTable extends Migration
     {
         Schema::create('dadosMM', function (Blueprint $table) {
             $table->increments('id');
-            $table->binary('foto');
+            $table->binary('foto')->nulllable();
             $table->string('nome');
             $table->string('dataNasc');
             $table->string('especializacao');

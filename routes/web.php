@@ -30,10 +30,7 @@ Route::get('/Recuperar', function(){
     return view('recuperar.trocarSenha');
 });
 
-//Rota para a página de adicionar membros
-// Route::get('/Membro', function(){
-//     return view('membro.adicionarMembro');
-// });
-Route::resource('membro', 'MembroController');
+//Rotas para alterar as configurações dos mentores e membros
+Route::resource('dadosMentoresM', 'DadosMentoresMController');
 
 
