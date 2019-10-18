@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDadosMMTable extends Migration
+class CreateDadosMentoresMembrosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateDadosMMTable extends Migration
      */
     public function up()
     {
-        Schema::create('dadosMM', function (Blueprint $table) {
+        Schema::create('dados_mentores_membros', function (Blueprint $table) {
             $table->increments('id');
-            $table->binary('foto')->nulllable();
+            $table->mediumText('foto')->nullable();
             $table->string('nome');
             $table->string('dataNasc');
             $table->string('especializacao');
@@ -34,6 +34,6 @@ class CreateDadosMMTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dadosMM');
+        Schema::dropIfExists('dados_mentores_membros');
     }
 }

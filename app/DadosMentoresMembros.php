@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DadosMM extends Model
+class DadosMentoresMembros extends Model
 {
     protected $fillable = [
         'id',
@@ -26,4 +26,5 @@ class DadosMM extends Model
     public function getEndereco(){return $this->endereco;}
     public function getRedesSociais(){return $this->redesSociais;}
     public function getSobre(){return $this->sobre;}
+
 }

@@ -30,9 +30,8 @@
 </head>
 <body>
     <div class="container">
-        <div style="top: 30px;" class='col-md-5 mx-auto'>
-
-            <form action="{{ route('dadosMentoresM.store')}}" method="post">
+        <div class='col-md-5 mx-auto'>
+            <form action="" method="post">
                 @csrf
                 <div class="custom-file row men">
                     <input type="file" class="custom-file-input" name='foto' id="customFile" disabled>
@@ -69,7 +68,7 @@
                 <button type="submit" class="btn btn-primary mb-2">Salvar</button>
             </form>
         </div>
-        <div style="top: 30px;" class='col-md-9 mx-auto'>
+        <div class='col-md-9 mx-auto'>
             <table class="table table-hover table-sm table-dark">
                 <tr>
                     <th width = "50px"><b>Id</b></th>   
@@ -79,7 +78,7 @@
                     <th width='180px'>Telefone</th>
                     <th width='180px'>Endereço</th>
                     <th width='180px'>Redes s.</th>
-                    <th width = "180px">Action</th>
+                    <th width = "300px">Action</th>
                 </tr>
 
             @foreach ($dados as $dado)
@@ -92,9 +91,8 @@
                 <td>{{$dado->endereco}}</td>
                 <td>{{$dado->redesSociais}}</td>
                 <td>
-                    <form action="{{ route('dadosMentoriaM.destroy', $dado->id) }}" method="post">
-                        <a class="btn btn-sm btn-success" href="{{route('dadosMentoriaM.show',$dado->id)}}">Show</a>
-                        <a class="btn btn-sm btn-warning" href="{{route('dadosMentoriaM.edit',$dado->id)}}">Edit</a>
+                    <form action="#" method="post">
+                        <a class="btn btn-sm btn-warning" href="">Edit</a>
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger">Delete</button>
@@ -104,7 +102,6 @@
             @endforeach
             </table>
 
-{!! $dados->links() !!}
         </div>
     </div>
 </body>

@@ -86,7 +86,8 @@
                                 </div>
                             </form>
                             <div>
-                                <a href="{{url('/')}}">Voltar</a>
+                                <a style='margin-right: 10px;' href="{{url('/')}}">Voltar</a>
+                                <a href="{{ route('register') }}">Registre-se</a>
                             </div>
                         </div>
 

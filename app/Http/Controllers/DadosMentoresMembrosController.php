@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\DadosMentoresMembros;
 use Illuminate\Http\Request;
-use App\DadosMM;
 
-class DadosMentoresMController extends Controller
+class DadosMentoresMembrosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class DadosMentoresMController extends Controller
      */
     public function index()
     {
-        $dados =  DadosMM::latest();
-        return view('dadosMentoresM.index', compact('dados'))
-                ->with('i', (request()->input('page', 1) -1)*5);
+        $dados = DadosMentoresMembros::latest()->paginate(5);
+        return view('dadosMentoresMembros.index', compact('dados'))
+                ->with('i', (request()->input('page', 1) -1)*5);  
     }
 
     /**
@@ -38,28 +38,25 @@ class DadosMentoresMController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'foto' => 'required|jpeg|png',
-            'nome' => 'required|max: 100',
-            'dataNasc' => 'required|date',
-            'especializacao' => 'required|max: 100',
-            'telefone' => 'required|numeric',
-            'endereco' => 'required|max: 100',
-            'redeSociais' => 'required',
+            'nome' => 'required',
+            'dataNasc' => 'required',
+            'especializacao' => 'required',
+            'telefone' => 'required',
+            'endereco' => 'required',
+            'redesSociais' => 'required',
             'sobre' => 'required'
         ]);
-        dd($request->all());
-        DadosMM::create($request->all());
-        return back();
-              
+        DadosMentoresMembros::create($request->all());
+        return back()->with('success', 'Dados salvos com sucesso');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\DadosMentoresMembros  $dadosMentoresMembros
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(DadosMentoresMembros $dadosMentoresMembros)
     {
         //
     }
@@ -67,10 +64,10 @@ class DadosMentoresMController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\DadosMentoresMembros  $dadosMentoresMembros
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(DadosMentoresMembros $dadosMentoresMembros)
     {
         //
     }
@@ -79,10 +76,10 @@ class DadosMentoresMController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\DadosMentoresMembros  $dadosMentoresMembros
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, DadosMentoresMembros $dadosMentoresMembros)
     {
         //
     }
@@ -90,10 +87,10 @@ class DadosMentoresMController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\DadosMentoresMembros  $dadosMentoresMembros
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(DadosMentoresMembros $dadosMentoresMembros)
     {
         //
     }

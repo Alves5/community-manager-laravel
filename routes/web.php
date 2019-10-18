@@ -31,6 +31,6 @@ Route::get('/Recuperar', function(){
 });
 
 //Rotas para alterar as configurações dos mentores e membros
-Route::resource('dadosMentoresM', 'DadosMentoresMController');
+Route::resource('dadosMentoresMembros', 'DadosMentoresMembrosController');
 
 
