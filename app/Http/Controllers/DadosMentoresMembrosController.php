@@ -47,7 +47,7 @@ class DadosMentoresMembrosController extends Controller
             'sobre' => 'required'
         ]);
         DadosMentoresMembros::create($request->all());
-        return back()->with('success', 'Dados salvos com sucesso');
+        return back();
     }
 
     /**
@@ -56,9 +56,10 @@ class DadosMentoresMembrosController extends Controller
      * @param  \App\DadosMentoresMembros  $dadosMentoresMembros
      * @return \Illuminate\Http\Response
      */
-    public function show(DadosMentoresMembros $dadosMentoresMembros)
+    public function show($id)
     {
-        //
+        $dados = DadosMentoresMembros::find($id);
+        return view('dadosMentoresMembros.edit', compact('dados'));
     }
 
     /**
@@ -67,9 +68,27 @@ class DadosMentoresMembrosController extends Controller
      * @param  \App\DadosMentoresMembros  $dadosMentoresMembros
      * @return \Illuminate\Http\Response
      */
-    public function edit(DadosMentoresMembros $dadosMentoresMembros)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nome' => 'required',
+            'dataNasc' => 'required',
+            'especializacao' => 'required',
+            'telefone' => 'required',
+            'endereco' => 'required',
+            'redesSociais' => 'required',
+            'sobre' => 'required'
+        ]);
+        $dados = DadosMentoresMembros::find($id);
+        $dados->nome = $request->get('nome');
+        $dados->dataNasc = $request->get('dataNasc');
+        $dados->especializacao = $request->get('especializacao');
+        $dados->telefone = $request->get('telefone');
+        $dados->endereco = $request->get('endereco');
+        $dados->redesSociais = $request->get('redesSociais');
+        $dados->sobre = $request->get('sobre');
+        $dados->save();
+        return redirect()->route('dadosMentoresMembros.index');
     }
 
     /**
@@ -79,7 +98,7 @@ class DadosMentoresMembrosController extends Controller
      * @param  \App\DadosMentoresMembros  $dadosMentoresMembros
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DadosMentoresMembros $dadosMentoresMembros)
+    public function edit(Request $request, DadosMentoresMembros $dadosMentoresMembros)
     {
         //
     }

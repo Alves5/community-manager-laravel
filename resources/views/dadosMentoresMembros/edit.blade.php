@@ -31,30 +31,31 @@
 <body>
     <div class="container">
         <div class='col-md-5 mx-auto'>
-            <form action="{{route('dadosMentoresMembros.store')}}" method="post">
+            <form action="{{route('dadosMentoresMembros.update', $dados->id)}}" method="post">
                 @csrf
+                @method('PUT')
                 <div class="custom-file row men">
                     <input type="file" class="custom-file-input" name='foto' id="customFile" disabled>
                     <label class="custom-file-label" for="customFile">Sua foto</label>
                 </div>
                 <div class="form-group row men">
-                    <input type="text" class="form-control" name='nome'  placeholder="* Seu nome" required>
+                    <input type="text" class="form-control" name='nome'  placeholder="* Seu nome" value='{{$dados->nome}}' required>
                 </div>
                 <div class="form-group row men">
-                    <input type="date" class="form-control" name='dataNasc' required>
+                    <input type="date" class="form-control" name='dataNasc' value='{{$dados->dataNasc}}' required>
                 </div>
                 <div class="form-group row men">
-                    <input type="text" class="form-control" name='especializacao'  placeholder="Alguma especialização">
+                    <input type="text" class="form-control" name='especializacao'  placeholder="Alguma especialização" value='{{$dados->especializacao}}'>
                 </div>
                 <div class="form-group row men">
-                    <input type="text" class="form-control" name='telefone'  placeholder="Seu telefone">
+                    <input type="text" class="form-control" name='telefone'  placeholder="Seu telefone" value='{{$dados->telefone}}'>
                 </div>
                 <div class="form-group row men">
-                    <input type="text" class="form-control" name='endereco'  placeholder="endereco">
+                    <input type="text" class="form-control" name='endereco'  placeholder="endereco" value='{{$dados->endereco}}'>
                 </div>
                 <div class="form-group row men">
                     <label for="inputState">Rede social</label>
-                    <select id="inputState" class="form-control" name='redesSociais'>
+                    <select id="inputState" class="form-control" name='redesSociais' value='{{$dados->redesSociais}}'>
                         <option selected>Nenhuma</option>
                         <option>Facebook</option>
                         <option>Instagram</option>
@@ -63,40 +64,10 @@
                 </div>
                 <div class="form-group row men">
                     <label for="exampleFormControlTextarea1">Sobre você</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name='sobre' rows="3"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name='sobre' rows="3" value='{{$dados->sobre}}'></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary mb-2">Salvar</button>
             </form>
-        </div>
-        <div class='col-md-9 mx-auto'>
-            <table class="table table-hover table-sm table-dark">
-                <tr>
-                    <th width = "50px"><b>Id</b></th>   
-                    <th width = "180px">Nome</th>
-                    <th width='180px'>Data nasc.</th>
-                    <th width='180px'>Especialização</th>
-                    <th width='180px'>Telefone</th>
-                    <th width='180px'>Endereço</th>
-                    <th width='180px'>Redes s.</th>
-                    <th width = "300px">Action</th>
-                </tr>
-
-            @foreach ($dados as $dado)
-            <tr>
-                <td><b>{{++$i}}.</b></td>
-                <td>{{$dado->nome}}</td>
-                <td>{{$dado->dataNasc}}</td>
-                <td>{{$dado->especializacao}}</td>
-                <td>{{$dado->telefone}}</td>
-                <td>{{$dado->endereco}}</td>
-                <td>{{$dado->redesSociais}}</td>
-                <td>
-                    <a class="btn btn-sm btn-primary" href="{{route('dadosMentoresMembros.show', $dado->id)}}">Edit</a>
-                </td>
-            </tr>
-            @endforeach
-            </table>
-
         </div>
     </div>
 </body>

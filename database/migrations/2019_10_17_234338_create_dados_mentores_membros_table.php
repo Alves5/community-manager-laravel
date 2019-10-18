@@ -15,7 +15,6 @@ class CreateDadosMentoresMembrosTable extends Migration
     {
         Schema::create('dados_mentores_membros', function (Blueprint $table) {
             $table->increments('id');
-            $table->mediumText('foto')->nullable();
             $table->string('nome');
             $table->string('dataNasc');
             $table->string('especializacao');

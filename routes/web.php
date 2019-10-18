@@ -25,7 +25,7 @@ Route::resource('biodata', 'BiodataController');
 //Rota para para definir as funções do CRUD
 Route::resource('startup', 'StartupController');
 
-//Rota para a página de trocar senha
+//Rota para a página de recuperar senha
 Route::get('/Recuperar', function(){
     return view('recuperar.trocarSenha');
 });
@@ -33,4 +33,8 @@ Route::get('/Recuperar', function(){
 //Rotas para alterar as configurações dos mentores e membros
 Route::resource('dadosMentoresMembros', 'DadosMentoresMembrosController');
 
+//Rota para a página de alterar senha
+Route::get('/Alterar', function(){
+    return view('alterarSenha.alterar');
+});
 

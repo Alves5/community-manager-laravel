@@ -8,7 +8,6 @@ class DadosMentoresMembros extends Model
 {
     protected $fillable = [
         'id',
-        'foto',
         'nome',
         'dataNasc',
         'especializacao',
@@ -18,7 +17,6 @@ class DadosMentoresMembros extends Model
         'sobre'];
 
     public function getId(){return $this->id;}
-    public function getFoto(){return $this->foto;}
     public function getNome(){return $this->nome;}
     public function getDataNasc(){return $this->dataNasc;}
     public function getEspecializacao(){return $this->especializacao;}

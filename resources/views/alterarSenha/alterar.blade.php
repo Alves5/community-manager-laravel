@@ -1,4 +1,4 @@
-<!-- index.blade.php : pasta ->recuperarS -->
+<!-- alterar.blade.php - alterarSenha -->
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -32,7 +32,7 @@
   <div id="sub-cont-trocar">
     <div id="title-trocar" class="row">
       <div class="col-lg-12">
-        <h2>Trocar senha <i class="fas fa-key"></i></h2>
+        <h2>Alterar senha <i class="fas fa-key"></i></h2>
       </div>
     </div>
 
@@ -41,14 +41,15 @@
         @csrf
         <div class="row">
             <div class="col-md-12 start-trocar">
+                <input class="form-control" type="text" placeholder="Digite sua senha antiga" name="senhaAntiga">
+            </div>
+            <div class="col-md-12 start-trocar">
                 <input class="form-control" type="text" placeholder="Nova senha" name="novaSenha">
                 <small id="emailHelp" class="form-text text-muted">A senha deve conter entre 6 e 12 caracteres.</small> 
-                  <!-- Pode se đazer uma ação com JavaScript para enviar
-                somente se tudo estiver nos conformes -->
             </div>
             <div class="col-md-12 start-trocar">
                 <input class="form-control" type="text" placeholder="Repita a senha" name="repitaSenha">
-                <button type="button" onclick='validarSenhas();' class="btn btn-sm btn-primary">Modificar senha  <i class="fas fa-chevron-right"></i></button>
+                <button type="button" onclick='validarSenhas();' class="btn btn-sm btn-primary">Alterar senha  <i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
       </form>
@@ -56,8 +57,5 @@
   </div>
 </div>
 
-<footer id='row'>
-    @include('layouts.footer')
-</footer>
 </body>
 </html>
