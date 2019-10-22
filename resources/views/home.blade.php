@@ -30,6 +30,10 @@
                             <i class="fas fa-key"></i>
                             <a href="{{url('/Alterar')}}">Alterar senha</a>
                         </div>
+                        <div>
+                            <i class="fas fa-book"></i>
+                            <a href="{{url('/ShowEdital')}}">Adicionar editais</a>
+                        </div>
                     </div>
                 </div>
             </div>
