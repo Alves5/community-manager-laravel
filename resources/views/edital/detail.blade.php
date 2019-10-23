@@ -25,23 +25,8 @@
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
 </head>
 <body>
-<div style='margin: 20px 0 30px 0;' class="container">
-        <div class='col-md-5 mx-auto'>
-            <h1>Atualizar edital</h1>  
-            <form action="{{route('updateEdital', $edital->id)}}" method="post">
-                @csrf
-                <div class="form-group row men">
-                    <input type="text" class="form-control" name='titulo' value='{{$edital->titulo}}' placeholder="Título do edital" required>
-                </div>
-                <div class="form-group row men">
-                    <input type="text" class="form-control" name='descricao' value='{{$edital->descricao}}' placeholder="Descriçao do edital" required>
-                </div>
-                <div class="form-group row men">
-                    <input type="text" class="form-control" name='link' value='{{$edital->link}}'  placeholder="link do edital">
-                </div>
-                <button type="submit" class="btn btn-primary mb-2">Salvar edição</button>
-            </form>
-        </div>
+    <div class="container">
+       
     </div>
 </body>
 </html>

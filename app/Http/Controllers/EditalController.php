@@ -23,11 +23,6 @@ class EditalController extends Controller
         return back();
     }
 
-    public function edit($id){
-        $edital = Edital::find($id);
-        return view('edital.edit', compact('edital'));
-    }
-
     public function update(Request $request, $id){
         $request->validate([
             'titulo' => 'required|string',

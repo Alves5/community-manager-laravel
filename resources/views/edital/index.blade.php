@@ -65,18 +65,43 @@
 
     <div style='margin-top: 60px;' class="container">
         <div class='row'>
-            <!-- Adicionar um foreach aqui -->
+            
             @foreach($edital as $edi)
                 <div class='card-group edital-card mx-auto'>
                     <div class="card">
                         <img src="{{asset('image/edital-default.png')}}" class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title">{{$edi->titulo}}</h5>
-                            <a href="/EditEdital/{{$edi->id}}" class="btn"><i class="fas fa-edit"></i></a>
-                            <a href="/RemoveEdital/{{$edi->id}}" class="btn"><i class="fas fa-trash"></i></a>
+                            <a href='#' class="btn" data-toggle="modal" data-target="#edital{{$edi->id}}"><i class="fas fa-edit"></i></a>
+                            <a onclick='editalRemove({{$edi->id}});' href='javascript:function' class="btn"><i class="fas fa-trash"></i></a>
                             <small>{{$edi->created_at}}</small>
                         </div>
                     </div>
+                </div>
+
+                <div id="edital{{$edi->id}}" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Adicionar editais</h5>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{route('updateEdital', $edi->id)}}" method="post">
+                                    @csrf
+                                    <div class="form-group row men">
+                                        <input type="text" class="form-control" name='titulo' value='{{$edi->titulo}}' placeholder="Título do edital" required>
+                                    </div>
+                                    <div class="form-group row men">
+                                        <input type="text" class="form-control" name='descricao' value='{{$edi->descricao}}' placeholder="Descriçao do edital" required>
+                                    </div>
+                                    <div class="form-group row men">
+                                        <input type="text" class="form-control" name='link' value='{{$edi->link}}'  placeholder="link do edital">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mb-2">Salvar edição</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>   
                 </div>
             @endforeach
         </div>

@@ -46,3 +46,20 @@ function validarSenhas(){
     }
     
 }
+
+//JS da página de Editais
+function editalRemove(id){
+    Swal.fire({
+        title: 'Deseja mesmo excluir?',
+        text: "Realmente deseja remover o edital",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, remover!'
+      }).then((result) => {
+        if (result.value) {
+          window.location.href = "/RemoveEdital/"+id;
+        }
+      })
+}

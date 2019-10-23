@@ -39,12 +39,11 @@ Route::get('/Alterar', function(){
 });
 
 //Rotas para a página de editais
-Route::get('/ShowEdital', 'EditalController@index');
+Route::get('/ShowEdital', 'EditalController@index')->name('show');
 Route::get('/CreateEdital', function(){
     return view('edital.createEdital');
 });
 Route::post('/Create', 'EditalController@inserir')->name('createEdital');
-Route::get('/EditEdital/{id}', 'EditalController@edit');
 Route::post('/Update/{id}', 'EditalController@update')->name('updateEdital');
 Route::get('/RemoveEdital/{id}', 'EditalController@remove');
 
