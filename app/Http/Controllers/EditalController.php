@@ -23,6 +23,10 @@ class EditalController extends Controller
         return back();
     }
 
+    public function detailEdital($id){
+        $edital = Edital::find($id);
+        return view('edital.detail', compact('edital'));
+    }
     public function update(Request $request, $id){
         $request->validate([
             'titulo' => 'required|string',
@@ -34,12 +38,12 @@ class EditalController extends Controller
         $edital->descricao = $request->get('descricao');
         $edital->link = $request->get('link');
         $edital->save();
-        return redirect()->route('show');
+        return back();
     }
 
     public function remove($id){
         $edital = Edital::find($id);
         $edital->delete();
-        return back();
+        return redirect()->route('show');
     }
 }

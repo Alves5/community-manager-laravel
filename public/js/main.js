@@ -1,5 +1,3 @@
-
-
 //JS da página de trocar senha
 function validarSenhas(){
     var valida = true;
@@ -48,6 +46,12 @@ function validarSenhas(){
 }
 
 //JS da página de Editais
+function detailEdital(id){
+    window.location.href = "/DetailEdital/"+id;
+}
+function enviarPesquisa(){
+    document.forms['formSearch'].submit();
+}
 function editalRemove(id){
     Swal.fire({
         title: 'Deseja mesmo excluir?',

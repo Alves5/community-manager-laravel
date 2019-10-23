@@ -11,6 +11,9 @@
 |
 */
 
+Use Illuminate\Support\Facades\Input;
+Use App\Edital;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -40,8 +43,16 @@ Route::get('/Alterar', function(){
 
 //Rotas para a página de editais
 Route::get('/ShowEdital', 'EditalController@index')->name('show');
-Route::get('/CreateEdital', function(){
-    return view('edital.createEdital');
+Route::get('/DetailEdital/{id}', 'EditalController@detailEdital');
+Route::post('/Buscar', function(){
+    $q = Input::get('search');
+    if($q != ' '){
+        $edital = Edital::where('titulo', 'LIKE' ,'%'.$q.'%')->get();
+        if(count($edital) >= 1 ){
+            return view('edital.index', compact('edital'));
+        }
+    }
+    return view('edital.index');
 });
 Route::post('/Create', 'EditalController@inserir')->name('createEdital');
 Route::post('/Update/{id}', 'EditalController@update')->name('updateEdital');

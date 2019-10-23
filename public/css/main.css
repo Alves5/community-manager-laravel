@@ -130,9 +130,6 @@
 }
 
 /* CSS da página de Editais */
-.edi{
-    margin: 20px 0 30px 0;
-}
 .edital-logo{
     background-image: url('../image/edital-logo.jpg');
     background-repeat: no-repeat;
@@ -144,15 +141,102 @@
     font-size: 50px;
     left: 8%;
 }
-.container > #create-edital{
+#open-create-edital{
     position: relative;
     float: right;
-    top: -20px;
-    right: 8px;
+    bottom: 55px;
+    right: 10px;
+}
+#search-edital{
+    position: relative;
+    width: 330px;
+    left: 20px;
+    bottom: 10px;
+}
+#search-edital > form{
+    width: 300px;
+}
+#search-edital > form > .form-group > label{
+    position: relative;
+    bottom: 10px;
+}
+#search-edital > form > .form-group > div > input{
+    width: 200px;
+    border-radius: 15px;
+}
+#search-edital > form > .form-group > div > a{
+    position: relative;
+    bottom: 8px;
+    right: 16px;
+    z-index:1;
+}
+#modal-create-edital{
+    width: 300px;
+    height: 450px;
+}
+#form-modal > form{
+    color: #00ffdc;
+    font-weight: bold;
+}
+#form-edital{
+    position: relative;
+    width: 300px;
+    height: 350px;
+}
+#form-edital > h4{
+    text-align: center;
+}
+#form-edital > #form{
+    position: relative;
+    margin-left: 1.5rem;
+    width: 250px;
+    height: 330px;
 }
 .edital-card{
     position: relative;
     width: 16rem;
     height: 12rem;
     margin: 10px 6px 70px 6px;
+}
+.edital-card > .card > .card-body > h5{
+    text-align: center;
+}
+.edital-card > .card > .card-body > small{
+    position: relative;
+    top: 10px;
+    float: right;
+}
+#detail-edital > a{
+    position: relative;
+    top: 1rem;
+}
+#detail-edital > .dropdown{
+    position: relative;
+    float: right;
+    margin-top: 1rem;
+}
+#detail-edital > .text-center > img{
+    position: relative;
+    margin: 2rem 0 2rem 0;
+    width: 420px;
+    height: 200px;
+}
+#detail-edital > h1{
+    position: relative;
+    font-size: 45px;
+    color: #696969;
+    font-weight: bold;
+    margin: 1rem 0 2rem 0;
+    text-align: center;
+}
+#detail-edital > .text-justify{
+    font-size: 22px;
+}
+#detail-edital > #link-edital{
+    font-family: Helvetica, sans-serif;
+    font-size: 17px;
+}
+#detail-edital > #link-edital > b{
+    color: #696969;
+    font-weight: bold;
 }
