@@ -44,7 +44,7 @@ Route::get('/Alterar', function(){
 //Rotas para a página de editais
 Route::get('/ShowEdital', 'EditalController@index')->name('show');
 Route::get('/DetailEdital/{id}', 'EditalController@detailEdital');
-Route::post('/Buscar', function(){
+Route::post('/ShowEdital', function(){
     $q = Input::get('search');
     if($q != ' '){
         $edital = Edital::where('titulo', 'LIKE' ,'%'.$q.'%')->get();
@@ -58,3 +58,6 @@ Route::post('/Create', 'EditalController@inserir')->name('createEdital');
 Route::post('/Update/{id}', 'EditalController@update')->name('updateEdital');
 Route::get('/RemoveEdital/{id}', 'EditalController@remove');
 
+//Rota para teste de envio de email
+Route::get('/Email', 'EmailController@home');
+Route::post('/SendEmail', 'EmailController@enviarEmail')->name('enviarEmail');

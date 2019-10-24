@@ -27,20 +27,18 @@
 <body>
 <div class="container">
         <div class="jumbotron jumbotron-fluid edital-logo">
+            <a id='arrow-left-edital' href="/home"><i class="fas fa-arrow-left fa-2x"></i></a>
             <div class="container">
                 <h1 class="display-4">Editais de Concurso e Seleções</h1>
             </div>
         </div>
 
         <div id='search-edital'>
-            <form action="{{url('/Buscar')}}" class="form-inline my-2 my-lg-0" method='post' name='formSearch'>
+            <form action="{{url('/ShowEdital')}}" class="form-inline my-2 my-lg-0" method='post' name='formSearch'>
                 @csrf
-                <div class="form-group row">
-                    <label for="search-edital" class="col-sm-2 col-form-label">Pequisar</label>
-                    <div class="col-sm-10">
+                <div class="form-group">
                         <input class="form-control mr-sm-2" type="search" name='search' aria-label="Search" id="search-edital">
                         <a onclick='enviarPesquisa();'><i class="fas fa-search"></i></a>
-                    </div>
                 </div>
             </form>
         </div>
@@ -63,13 +61,13 @@
                         </div>
                         <div class="form-group">
                             <label for="descricaoEdital">Descrição</label>
-                            <textarea id="descricaoEdital" class="form-control" id="exampleFormControlTextarea1" name='descricao' rows="3" style='resize: none;'></textarea>
+                            <textarea id="descricaoEdital" class="form-control" id="exampleFormControlTextarea1" name='descricao' rows="2" style='resize: none;'></textarea>
                         </div>
                         <div class="form-group">
                             <label for="linkEdital">Link</label>
                             <input id='linkEdital' type="text" class="form-control" name='link'  placeholder="link do edital">
                         </div>
-                        <button type="submit" class="btn btn-primary mb-2">Salvar edital</button>
+                        <button id='save-edital' type="submit" class="btn btn-primary mb-2">Salvar <i class="fas fa-arrow-right"></i></button>
                     </form>
                 </div>
             </div>

@@ -7,7 +7,6 @@
     position: relative;
     text-align: center;
 }
-
 /* CSS da página de login */
 #login{
     background-image: url('../image/fundo-login.jpg');
@@ -59,7 +58,6 @@
     top: 2px;
     left: 6px;
 }
-
 /* CSS da página de adicionar Startup */
 .form-inse{
     position: relative;
@@ -96,7 +94,6 @@
     font-size: 18px;
     float: right;
 }
-
 /* CSS da página de trocar senha */
 #sub-cont-trocar{
     position: relative;
@@ -130,6 +127,11 @@
 }
 
 /* CSS da página de Editais */
+#arrow-left-edital{
+    position: relative;
+    left: 10px;
+    bottom: 50px;
+}
 .edital-logo{
     background-image: url('../image/edital-logo.jpg');
     background-repeat: no-repeat;
@@ -147,6 +149,14 @@
     bottom: 55px;
     right: 10px;
 }
+#save-edital{
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    margin-top: 20px;
+    border: #00ffdc;
+    border-radius: 25px;
+    background-color: #00ffdc;
+}
 #search-edital{
     position: relative;
     width: 330px;
@@ -156,27 +166,40 @@
 #search-edital > form{
     width: 300px;
 }
-#search-edital > form > .form-group > label{
-    position: relative;
-    bottom: 10px;
-}
-#search-edital > form > .form-group > div > input{
+#search-edital > form > .form-group > input{
     width: 200px;
     border-radius: 15px;
 }
-#search-edital > form > .form-group > div > a{
+#search-edital > form > .form-group > a{
     position: relative;
     bottom: 8px;
     right: 16px;
     z-index:1;
 }
+@media screen and (max-width: 580px){
+    #search-edital > form > .form-group > a{
+        bottom: 40px;
+        left: 190px;
+    }   
+}
 #modal-create-edital{
-    width: 300px;
+    width: 400px;
     height: 450px;
 }
 #form-modal > form{
     color: #00ffdc;
     font-weight: bold;
+}
+#form-modal > form > .form-group > input{
+    margin: 3px 0 6px 0;
+    border: none;
+    border-radius: 3px;
+    border-bottom: solid 1px #696969;
+}
+#form-modal > form > .form-group > textarea{
+    border: none;
+    border-radius: 0;
+    border-bottom: solid 1px #696969;
 }
 #form-edital{
     position: relative;

@@ -34,6 +34,10 @@
                             <i class="fas fa-book"></i>
                             <a href="{{url('/ShowEdital')}}">Adicionar editais</a>
                         </div>
+                        <div>
+                            <i class="fas fa-envelope-square"></i>
+                            <a href="{{url('/Email')}}">Enviar email</a>
+                        </div>
                     </div>
                 </div>
             </div>

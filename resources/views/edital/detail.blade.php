@@ -26,7 +26,7 @@
 </head>
 <body>
     <div id='detail-edital' class="container">
-        <a id='arrow-left' href="/ShowEdital"><i class="fas fa-arrow-left fa-2x"></i></a>
+        <a href="/ShowEdital"><i class="fas fa-arrow-left fa-2x"></i></a>
 
         <div class="dropdown">
             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -43,21 +43,24 @@
                     <div class="modal-dialog modal-sm">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Adicionar editais</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Atualizar editais</h5>
                             </div>
-                            <div class="modal-body">
+                            <div id='form-modal' class="modal-body">
                                 <form action="{{route('updateEdital', $edital->id)}}" method="post">
                                     @csrf
-                                    <div class="form-group row men">
-                                        <input type="text" class="form-control" name='titulo' value='{{$edital->titulo}}' placeholder="Título do edital" required>
+                                    <div class="form-group">
+                                        <label for="tituloEdital">Título</label>
+                                        <input id='tituloEdital' type="text" class="form-control" name='titulo'  placeholder="Título do edital" value='{{$edital->titulo}}' required>
                                     </div>
-                                    <div class="form-group row men">
-                                        <input type="text" class="form-control" name='descricao' value='{{$edital->descricao}}' placeholder="Descriçao do edital" required>
+                                    <div class="form-group">
+                                        <label for="descricaoEdital">Descrição</label>
+                                        <textarea id="descricaoEdital" class="form-control" id="exampleFormControlTextarea1" name='descricao' rows="2" style='resize: none;'>{{$edital->descricao}}</textarea>
                                     </div>
-                                    <div class="form-group row men">
-                                        <input type="text" class="form-control" name='link' value='{{$edital->link}}'  placeholder="link do edital">
+                                    <div class="form-group">
+                                        <label for="linkEdital">Link</label>
+                                        <input id='linkEdital' type="text" class="form-control" name='link'  placeholder="link do edital" value="{{$edital->link}}">
                                     </div>
-                                    <button type="submit" class="btn btn-primary mb-2">Salvar edição</button>
+                                    <button id='save-edital' type="submit" class="btn btn-primary mb-2">Salvar <i class="fas fa-arrow-right"></i></button>
                                 </form>
                             </div>
                         </div>
