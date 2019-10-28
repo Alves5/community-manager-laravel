@@ -65,7 +65,7 @@
                         </div>
                         <div class="form-group">
                             <label for="linkEdital">Link</label>
-                            <input id='linkEdital' type="text" class="form-control" name='link'  placeholder="link do edital">
+                            <input id='linkEdital' type="url" class="form-control" name='link'  placeholder="link do edital">
                         </div>
                         <button id='save-edital' type="submit" class="btn btn-primary mb-2">Salvar <i class="fas fa-arrow-right"></i></button>
                     </form>

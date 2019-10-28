@@ -41,12 +41,12 @@
         </div>          
                 <div id="edital{{$edital->id}}" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
+                        <div id='modal-update-edital' class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Atualizar editais</h5>
                             </div>
                             <div id='form-modal' class="modal-body">
-                                <form action="{{route('updateEdital', $edital->id)}}" method="post">
+                                <form action="{{route('updateEdital', $edital->id)}}" method="post" name='modificaEdi'>
                                     @csrf
                                     <div class="form-group">
                                         <label for="tituloEdital">Título</label>
@@ -58,9 +58,9 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="linkEdital">Link</label>
-                                        <input id='linkEdital' type="text" class="form-control" name='link'  placeholder="link do edital" value="{{$edital->link}}">
+                                        <input id='linkEdital' type="url" class="form-control" name='link'  placeholder="link do edital" value="{{$edital->link}}">
                                     </div>
-                                    <button id='save-edital' type="submit" class="btn btn-primary mb-2">Salvar <i class="fas fa-arrow-right"></i></button>
+                                    <button id='save-edital' type='submit' class="btn btn-primary mb-2">Salvar <i class="fas fa-arrow-right"></i></button>
                                 </form>
                             </div>
                         </div>

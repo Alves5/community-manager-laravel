@@ -186,6 +186,10 @@
     width: 400px;
     height: 450px;
 }
+#modal-update-edital{
+    width: 400px;
+    height: 450px;
+}
 #form-modal > form{
     color: #00ffdc;
     font-weight: bold;

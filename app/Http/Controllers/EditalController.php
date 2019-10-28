@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Edital;
 
 class EditalController extends Controller
@@ -29,9 +30,9 @@ class EditalController extends Controller
     }
     public function update(Request $request, $id){
         $request->validate([
-            'titulo' => 'required|string',
-            'descricao' => 'required|string',
-            'link' => 'required|string'
+            'titulo' => 'required|string|max: 40|min: 3',
+            'descricao' => 'required|string|max: 255',
+            'link' => 'required|string|max: 255'
         ]);
         $edital = Edital::find($id);
         $edital->titulo = $request->get('titulo');
