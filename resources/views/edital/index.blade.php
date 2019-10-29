@@ -29,7 +29,7 @@
         <div class="jumbotron jumbotron-fluid edital-logo">
             <a id='arrow-left-edital' href="/home"><i class="fas fa-arrow-left fa-2x"></i></a>
             <div class="container">
-                <h1 class="display-4">Editais de Concurso e Seleções</h1>
+                <h1 class="display-4">Editais de fomento e chamadas</h1>
             </div>
         </div>
 

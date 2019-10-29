@@ -71,8 +71,12 @@
             <img  src="{{asset('image/edital-default.png')}}" class="rounded img-fluid">
         </div>
         <h1>{{$edital->titulo}}</h1>
-        <p class="text-justify">{{$edital->descricao}}</p>
-        <p id='link-edital'><b>Edital:</b> para ter acesso ao edital, <a href="{{$edital->link}}">link</a></p>
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <p class="text-justify">{{$edital->descricao}}</p>
+                <p id='link-edital'><b>Edital:</b> para ter acesso ao edital, <a href="{{$edital->link}}">link</a></p>
+            </div>
+        </div>
     </div>
 </body>
 </html>

@@ -38,6 +38,10 @@
                             <i class="fas fa-envelope-square"></i>
                             <a href="{{url('/Email')}}">Enviar email</a>
                         </div>
+                        <div>
+                            <i class="fas fa-calendar-alt"></i>
+                            <a href="{{url('/Agenda')}}">Agenda</a>
+                        </div>
                     </div>
                 </div>
             </div>
