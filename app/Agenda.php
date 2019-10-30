@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Agenda extends Model
 {
-    protected $table = 'agendas';
     protected $fillable = ['id','titulo','color','start_date','end_date'];
 
     public function getId(){return $this->id;}

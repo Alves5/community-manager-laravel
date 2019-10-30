@@ -28,6 +28,7 @@
     <script src="{{ asset('js/fullCalendar/core-main.js') }}"></script>
     <script src="{{ asset('js/fullCalendar/inte-main.js') }}"></script>
     <script src="{{ asset('js/fullCalendar/day-main.js') }}"></script>
+    <script src="{{ asset('js/fullCalendar/pt-br.js') }}"></script>
 
     <script>
 
@@ -35,9 +36,16 @@
         var calendarEl = document.getElementById('calendar');
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
-            plugins: [ 'interaction', 'dayGrid' ],
-            defaultView: 'dayGridMonth',
-            selectable: true
+            locale: 'pt-br',
+            plugins: [ 'interaction', 'dayGrid', 'timeGrid'],
+            header: {
+              left: 'prev, next today',
+              center: 'title',
+              right: 'listDay,listWeek,month'
+            },
+            selectable: true,
+            editable: true,
+            eventLimit: true,
         });
 
         calendar.render();
@@ -46,7 +54,10 @@
     </script>
   </head>
   <body>
-
-    <div id='calendar'></div>
+      <div class="container">
+        <div class="row">
+          <div id='calendar' class="col-md-10 offset-md-1"></div>
+        </div>
+      </div>
 </body>
 </html>
