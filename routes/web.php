@@ -63,6 +63,4 @@ Route::get('/Email', 'EmailController@home');
 Route::post('/SendEmail', 'EmailController@enviarEmail')->name('enviarEmail');
 
 //Rotas para a página agenda
-Route::get('/Agenda', function(){
-    return view('agenda.index');
-});
+Route::get('/Agenda', 'AgendaController@index');
