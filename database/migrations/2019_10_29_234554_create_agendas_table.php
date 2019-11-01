@@ -16,7 +16,6 @@ class CreateAgendasTable extends Migration
         Schema::create('agendas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('titulo');
-            $table->string('color');
             $table->date('start_date');
             $table->date('end_date');
             $table->timestamps();

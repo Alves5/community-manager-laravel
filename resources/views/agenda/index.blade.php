@@ -29,29 +29,6 @@
     <script src="{{ asset('js/fullCalendar/inte-main.js') }}"></script>
     <script src="{{ asset('js/fullCalendar/day-main.js') }}"></script>
     <script src="{{ asset('js/fullCalendar/pt-br.js') }}"></script>
-
-    <script>
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            locale: 'pt-br',
-            plugins: [ 'interaction', 'dayGrid', 'timeGrid'],
-            header: {
-              left: 'prev, next today',
-              center: 'title',
-              right: 'listDay,listWeek,month'
-            },
-            selectable: true,
-            editable: true,
-            eventLimit: true,
-        });
-
-        calendar.render();
-      });
-
-    </script>
   </head>
   <body>
       <div class="container">
@@ -60,4 +37,64 @@
         </div>
       </div>
 </body>
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+      locale: 'pt-br',
+      plugins: [ 'interaction', 'dayGrid', 'timeGrid'],
+      header: {
+        left: 'prev, next today',
+        center: 'title',
+        right: 'listDay,listWeek,month'
+      },
+      selectable: true,
+      editable: true,
+      eventLimit: true,
+      // dateClick: function(info) {
+      //   alert('Agendamento concluido!');
+      //   //info.dateStr
+      // },
+      select: function() {
+        (async () => {
+
+          const { value: fruit } = await Swal.fire({
+  title: 'Select field validation',
+  input: 'select',
+  inputOptions: {
+    apples: 'Apples',
+    bananas: 'Bananas',
+    grapes: 'Grapes',
+    oranges: 'Oranges'
+  },
+  inputPlaceholder: 'Select a fruit',
+  showCancelButton: true,
+  inputValidator: (value) => {
+    return new Promise((resolve) => {
+      if (value === 'oranges') {
+        resolve()
+      } else {
+        resolve('You need to select oranges :)')
+      }
+    })
+  }
+})
+
+if (fruit) {
+  Swal.fire('You selected: ' + fruit)
+}
+
+          })()
+       
+          
+        // alert('selected ' + info.startStr + ' to ' + info.endStr);
+      }
+  });
+
+  calendar.render();
+});
+
+</script>
 </html>
