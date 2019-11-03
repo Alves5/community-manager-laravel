@@ -35,6 +35,40 @@
         <div class="row">
           <div id='calendar' class="col-md-10 offset-md-1"></div>
         </div>
+        <div class="row">
+          <form action="" method="post">
+            <div class="form-group">
+              <select name="evento" id="" class='form-control'>
+                <option value="mentoria">Mentoria</option>
+                <option value="palestra">Palestra</option>
+                <option value="reuniao">Reunião</option>
+                <option value="simposio">Simpósio</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <select name="mentores" id="" class='form-control'>
+                <option value="luis">Luiz Eduardo</option>
+                <option value="maruska">Maruska</option>
+                <option value="marina">Marina Lecas</option>
+                <option value="diego">Diego Saulo</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <select name="local" id="" class='form-control'>
+                <option value="sala_1">Sala 1</option>
+                <option value="sala_2">Sala 2</option>
+                <option value="sala_3">Sala 3</option>
+                <option value="launcher">Launcher</option>
+              </select>
+            </div>
+            <div class="form-group">
+            
+            </div>
+            <div class="form-group">
+              
+            </div>
+          </form>
+        </div>
       </div>
 </body>
 <script>
@@ -60,31 +94,23 @@ document.addEventListener('DOMContentLoaded', function() {
       select: function() {
         (async () => {
 
-          const { value: fruit } = await Swal.fire({
-  title: 'Select field validation',
-  input: 'select',
-  inputOptions: {
-    apples: 'Apples',
-    bananas: 'Bananas',
-    grapes: 'Grapes',
-    oranges: 'Oranges'
-  },
-  inputPlaceholder: 'Select a fruit',
-  showCancelButton: true,
-  inputValidator: (value) => {
-    return new Promise((resolve) => {
-      if (value === 'oranges') {
-        resolve()
-      } else {
-        resolve('You need to select oranges :)')
-      }
-    })
-  }
-})
+          const { value: agendar } = await Swal.fire({
+            title: 'Multiple inputs',
+            html:
+              '<input id="swal-input1" class="swal2-input">' +
+              '<input id="swal-input2" class="swal2-input">',
+            focusConfirm: false,
+            preConfirm: () => {
+              return [
+                document.getElementById('swal-input1').value,
+                document.getElementById('swal-input2').value
+              ]
+            }
+          })
 
-if (fruit) {
-  Swal.fire('You selected: ' + fruit)
-}
+          if (formValues) {
+            Swal.fire(JSON.stringify(formValues))
+          }
 
           })()
        
