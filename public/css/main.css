@@ -267,3 +267,41 @@
     color: #696969;
     font-weight: bold;
 }
+/* CSS da página da agenda */
+#agenda{
+    position: relative;
+    left: 60px;
+}
+.form-agenda > input[type=text]{
+    position: relative;
+    width: 350px;
+    color: #000;
+    border: none;
+    border-radius: 0px;
+    border-bottom: solid 1px #696969;
+    box-shadow: none;
+}
+.form-agenda > select{
+    position: relative;
+    width: 350px;
+    color: #000;
+    border: none;
+    border-radius: 0px;
+    border-bottom: solid 1px #696969;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+.form-agenda > select::-ms-expand{
+    display: none;
+}
+.form-agenda > select:focus{
+    box-shadow: none;
+}
+.form-agenda > .dropdown > button{
+    text-align: justify;
+    box-shadow: none;
+    border: none;
+}
+.form-agenda > .dropdown > .dropdown-menu {
+    box-shadow: none;
+}

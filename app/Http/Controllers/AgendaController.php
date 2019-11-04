@@ -12,7 +12,7 @@ class AgendaController extends Controller
             return view('agenda.index');
     }
     
-    public function adicionar(Request $request){
-     
+    public function adicionar(){
+        return 'eeeeeee';
     }
 }

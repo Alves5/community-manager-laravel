@@ -35,40 +35,6 @@
         <div class="row">
           <div id='calendar' class="col-md-10 offset-md-1"></div>
         </div>
-        <div class="row">
-          <form action="" method="post">
-            <div class="form-group">
-              <select name="evento" id="" class='form-control'>
-                <option value="mentoria">Mentoria</option>
-                <option value="palestra">Palestra</option>
-                <option value="reuniao">Reunião</option>
-                <option value="simposio">Simpósio</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <select name="mentores" id="" class='form-control'>
-                <option value="luis">Luiz Eduardo</option>
-                <option value="maruska">Maruska</option>
-                <option value="marina">Marina Lecas</option>
-                <option value="diego">Diego Saulo</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <select name="local" id="" class='form-control'>
-                <option value="sala_1">Sala 1</option>
-                <option value="sala_2">Sala 2</option>
-                <option value="sala_3">Sala 3</option>
-                <option value="launcher">Launcher</option>
-              </select>
-            </div>
-            <div class="form-group">
-            
-            </div>
-            <div class="form-group">
-              
-            </div>
-          </form>
-        </div>
       </div>
 </body>
 <script>
@@ -87,35 +53,64 @@ document.addEventListener('DOMContentLoaded', function() {
       selectable: true,
       editable: true,
       eventLimit: true,
-      // dateClick: function(info) {
-      //   alert('Agendamento concluido!');
-      //   //info.dateStr
-      // },
-      select: function() {
+      select: function(info) {
         (async () => {
 
           const { value: agendar } = await Swal.fire({
-            title: 'Multiple inputs',
             html:
-              '<input id="swal-input1" class="swal2-input">' +
-              '<input id="swal-input2" class="swal2-input">',
-            focusConfirm: false,
-            preConfirm: () => {
-              return [
-                document.getElementById('swal-input1').value,
-                document.getElementById('swal-input2').value
-              ]
-            }
+              "<form id='agenda' method='post' action='{{url('/AdicionarEvento')}}'>"+
+                "<div class='form-group form-agenda'>"+
+                  "<input type='text' id='titulo' name='titulo' value='Adicionar titulo...' class='form-control' required>"+
+                "</div>"+
+                "<div class='form-group form-agenda'>"+
+                  "<select name='evento' id='evento' class='form-control'>"+
+                      "<option value=''>Escolha o evento...</option>"+
+                      "<option value='mentoria'>Mentoria</option>"+
+                      "<option value='palestra'>Palestra</option>"+
+                      "<option value='reuniao'>Reunião</option>"+
+                      "<option value='simposio'>Simpósio</option>"+
+                    "</select>"+
+                "</div>"+
+                "<div class='form-group form-agenda'>"+
+                    "<select name='mentor' id='' class='form-control'>"+
+                      "<option value=''>Adicionar mentor...</option>"+
+                      "<option value='luis'>Luiz Eduardo</option>"+
+                      "<option value='maruska'>Maruska</option>"+
+                      "<option value='marina'>Marina Lecas</option>"+
+                      "<option value='diego'>Diego Saulo</option>"+
+                    "</select>"+
+                "</div>"+
+                "<div class='form-group form-agenda'>"+
+                  "<select name='local' id='' class='form-control'>"+
+                    "<option value=''>Adicionar local...</option>"+
+                    "<option value='sala_1'>Sala 1</option>"+
+                    "<option value='sala_2'>Sala 2</option>"+
+                    "<option value='sala_3'>Sala 3</option>"+
+                    "<option value='launcher'>Launcher</option>"+
+                  "</select>"+
+                "</div>"+
+                "<div class='form-group form-agenda'>"+
+                  "<input type='text' name='descricao' value='Adicionar descrição...' class='form-control' required>"+
+                "</div>"+
+                "<div class='form-group form-agenda'>"+
+                  "<select name='equipamentos' id='' class='form-control'>"+
+                      "<option value='>Adicionar equipamento...</option>"+
+                      "<option value='monitor'>Monitor</option>"+
+                      "<option value='notebook_1'>Notebook 1</option>"+
+                      "<option value='notebook_2'>Notebook 2</option>"+
+                      "<option value='microfone'>Microfone</option>"+
+                    "</select>"+
+                  "</div>"+
+                  "<div class='form-group'>"+
+                    "<label>"+info.startStr + ' - ' + info.endStr+"</label>"+
+                  "</div>"+
+                    "<input type='submit' class='btn btn-primary' value='Salvar'>"+
+                "</form>",
+              showConfirmButton: false
           })
 
-          if (formValues) {
-            Swal.fire(JSON.stringify(formValues))
-          }
-
-          })()
+        })()
        
-          
-        // alert('selected ' + info.startStr + ' to ' + info.endStr);
       }
   });
 

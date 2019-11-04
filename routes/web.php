@@ -64,6 +64,8 @@ Route::post('/SendEmail', 'EmailController@enviarEmail')->name('enviarEmail');
 
 //Rotas para a página agenda
 Route::get('/Agenda', 'AgendaController@index');
-// Route::post('/AdicionarEvento', 'AgendaController@adicionar');
+Route::post('/AdicionarEvento', function(){
+    return "srgfsdf";
+});
 // Route::get('/AdicionarEvento/{id}', 'AgendaController@editar');
 // Route::get('/AdicionarEvento/{id}', 'AgendaController@remover');
