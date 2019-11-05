@@ -8,11 +8,23 @@ use App\Agenda;
 class AgendaController extends Controller
 {
     public function index(){
-     
-            return view('agenda.index');
+        $agenda = Agenda::all();
+        return view('agenda.index', compact('agenda'));
     }
     
-    public function adicionar(){
-        return 'eeeeeee';
+    public function adicionar(Request $request){
+        $request->validate([
+            'titulo' => 'required',
+            'evento' => 'required',
+            'mentor' => 'required',
+            'local' => 'required',
+            'descricao' => 'required',
+            'equipamento' => 'required',
+            'color' => 'required'
+        ]);
+
+        Agenda::create($request->all());
+        return back();
     }
+
 }

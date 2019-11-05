@@ -44,26 +44,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
       locale: 'pt-br',
+      events: [
+          <?php 
+            foreach($agenda as $gen){
+          ?>
+              {
+                id: "<?php echo $gen["id"] ?>",
+                title: "<?php echo $gen["titulo"] ?>",
+                start: "<?php echo $gen["start_date"] ?>",
+                end: "<?php echo $gen["end_date"] ?>",
+                backgroundColor: "<?php echo $gen["color"] ?>",
+                borderColor: 'transparent',
+                textColor: '#fff'
+              },
+          <?php
+            }
+          ?>
+      ],
       plugins: [ 'interaction', 'dayGrid', 'timeGrid'],
+      defaultView: 'dayGridMonth',
+      selectable: true,
+      eventLimit: true,
       header: {
         left: 'prev, next today',
         center: 'title',
-        right: 'listDay,listWeek,month'
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
-      selectable: true,
-      editable: true,
-      eventLimit: true,
       select: function(info) {
         (async () => {
 
           const { value: agendar } = await Swal.fire({
             html:
-              "<form id='agenda' method='post' action='{{url('/AdicionarEvento')}}'>"+
+              "<form id='agenda' method='get' action='/AdicionarEvento'>"+
                 "<div class='form-group form-agenda'>"+
                   "<input type='text' id='titulo' name='titulo' value='Adicionar titulo...' class='form-control' required>"+
                 "</div>"+
                 "<div class='form-group form-agenda'>"+
-                  "<select name='evento' id='evento' class='form-control'>"+
+                  "<select name='evento' id='evento' class='form-control' required>"+
                       "<option value=''>Escolha o evento...</option>"+
                       "<option value='mentoria'>Mentoria</option>"+
                       "<option value='palestra'>Palestra</option>"+
@@ -72,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     "</select>"+
                 "</div>"+
                 "<div class='form-group form-agenda'>"+
-                    "<select name='mentor' id='' class='form-control'>"+
+                    "<select name='mentor' id='' class='form-control' required>"+
                       "<option value=''>Adicionar mentor...</option>"+
                       "<option value='luis'>Luiz Eduardo</option>"+
                       "<option value='maruska'>Maruska</option>"+
@@ -81,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     "</select>"+
                 "</div>"+
                 "<div class='form-group form-agenda'>"+
-                  "<select name='local' id='' class='form-control'>"+
+                  "<select name='local' id='' class='form-control' required>"+
                     "<option value=''>Adicionar local...</option>"+
                     "<option value='sala_1'>Sala 1</option>"+
                     "<option value='sala_2'>Sala 2</option>"+
@@ -93,16 +110,31 @@ document.addEventListener('DOMContentLoaded', function() {
                   "<input type='text' name='descricao' value='Adicionar descrição...' class='form-control' required>"+
                 "</div>"+
                 "<div class='form-group form-agenda'>"+
-                  "<select name='equipamentos' id='' class='form-control'>"+
-                      "<option value='>Adicionar equipamento...</option>"+
+                  "<select name='equipamento' id='' class='form-control' required>"+
+                      "<option value=''>Adicionar equipamento...</option>"+
                       "<option value='monitor'>Monitor</option>"+
                       "<option value='notebook_1'>Notebook 1</option>"+
                       "<option value='notebook_2'>Notebook 2</option>"+
                       "<option value='microfone'>Microfone</option>"+
                     "</select>"+
                   "</div>"+
+                  "<div class='form-group form-agenda'>"+
+                    "<select name='color' id='' class='form-control' required>"+
+                      "<option value=''>Adicione uma cor...</option>"+
+                      "<option value='#696969'>cinza</option>"+
+                      "<option value='#00FF00'>verde</option>"+
+                      "<option value='#FF0000'>vermelho</option>"+
+                      "<option value='#0000FF'>azul</option>"+
+                      "<option value='#A020F0'>roxo</option>"+
+                      "<option value='#FFA500'>laranja</option>"+
+                    "</select>"+
+                  "</div>"+
                   "<div class='form-group'>"+
                     "<label>"+info.startStr + ' - ' + info.endStr+"</label>"+
+                  "</div>"+
+                  "<div class='form-group'>"+
+                      "<input type='hidden' name='start_date' value='"+info.startStr+"' >"+
+                      "<input type='hidden' name='end_date' value='"+info.endStr+"' >"+
                   "</div>"+
                     "<input type='submit' class='btn btn-primary' value='Salvar'>"+
                 "</form>",
