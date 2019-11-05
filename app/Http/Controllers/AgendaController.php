@@ -20,10 +20,28 @@ class AgendaController extends Controller
             'local' => 'required',
             'descricao' => 'required',
             'equipamento' => 'required',
-            'color' => 'required'
         ]);
-
-        Agenda::create($request->all());
+        $data = $request->all();
+        
+        
+        switch($request->evento){
+            case 'mentoria':
+                $data['color'] = '#C9FF81';
+            break;
+            case 'eventos':
+                $data['color'] = '#FFA1A1';
+            break;
+            case 'cursos':
+                $data['color'] = '#E8B2FF';
+            break;
+            case 'oficinas':
+                $data['color'] = '#B2F7FF';
+            break;
+            case 'reunioes':
+                $data['color'] = '#FF0F74';
+            break;
+        }
+        Agenda::create($data);
         return back();
     }
 

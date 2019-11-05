@@ -55,21 +55,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 end: "<?php echo $gen["end_date"] ?>",
                 backgroundColor: "<?php echo $gen["color"] ?>",
                 borderColor: 'transparent',
-                textColor: '#fff'
+                textColor: '#'
               },
           <?php
             }
           ?>
       ],
       plugins: [ 'interaction', 'dayGrid', 'timeGrid'],
-      defaultView: 'dayGridMonth',
       selectable: true,
       eventLimit: true,
       header: {
-        left: 'prev, next today',
+        left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay'
-      },
+        right: 'timeGridDay',
+    },
       select: function(info) {
         (async () => {
 
@@ -83,9 +82,10 @@ document.addEventListener('DOMContentLoaded', function() {
                   "<select name='evento' id='evento' class='form-control' required>"+
                       "<option value=''>Escolha o evento...</option>"+
                       "<option value='mentoria'>Mentoria</option>"+
-                      "<option value='palestra'>Palestra</option>"+
-                      "<option value='reuniao'>Reunião</option>"+
-                      "<option value='simposio'>Simpósio</option>"+
+                      "<option value='eventos'>Eventos</option>"+
+                      "<option value='cursos'>Cursos</option>"+
+                      "<option value='oficinas'>Oficinas</option>"+
+                      "<option value='reunioes'>Reuniões</option>"+
                     "</select>"+
                 "</div>"+
                 "<div class='form-group form-agenda'>"+
@@ -118,23 +118,13 @@ document.addEventListener('DOMContentLoaded', function() {
                       "<option value='microfone'>Microfone</option>"+
                     "</select>"+
                   "</div>"+
-                  "<div class='form-group form-agenda'>"+
-                    "<select name='color' id='' class='form-control' required>"+
-                      "<option value=''>Adicione uma cor...</option>"+
-                      "<option value='#696969'>cinza</option>"+
-                      "<option value='#00FF00'>verde</option>"+
-                      "<option value='#FF0000'>vermelho</option>"+
-                      "<option value='#0000FF'>azul</option>"+
-                      "<option value='#A020F0'>roxo</option>"+
-                      "<option value='#FFA500'>laranja</option>"+
-                    "</select>"+
-                  "</div>"+
                   "<div class='form-group'>"+
-                    "<label>"+info.startStr + ' - ' + info.endStr+"</label>"+
+                    "<label>"+info.startStr+"</label>"+
                   "</div>"+
                   "<div class='form-group'>"+
                       "<input type='hidden' name='start_date' value='"+info.startStr+"' >"+
                       "<input type='hidden' name='end_date' value='"+info.endStr+"' >"+
+                      "<input type='hidden' name='color'>"+
                   "</div>"+
                     "<input type='submit' class='btn btn-primary' value='Salvar'>"+
                 "</form>",

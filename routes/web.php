@@ -67,3 +67,6 @@ Route::get('/Agenda', 'AgendaController@index');
 Route::get('/AdicionarEvento', 'AgendaController@adicionar');
 // Route::get('/AdicionarEvento/{id}', 'AgendaController@editar');
 // Route::get('/AdicionarEvento/{id}', 'AgendaController@remover');
+Route::get('/Teste', function(){
+    return view('teste');
+});
