@@ -26,19 +26,19 @@ class AgendaController extends Controller
         
         switch($request->evento){
             case 'mentoria':
-                $data['color'] = '#C9FF81';
+                $data['color'] = '#AEFB49';
             break;
             case 'eventos':
-                $data['color'] = '#FFA1A1';
+                $data['color'] = '#FF7171';
             break;
             case 'cursos':
-                $data['color'] = '#E8B2FF';
+                $data['color'] = '#D67BFC';
             break;
             case 'oficinas':
-                $data['color'] = '#B2F7FF';
+                $data['color'] = '#65E9FF';
             break;
             case 'reunioes':
-                $data['color'] = '#FF0F74';
+                $data['color'] = '#FFD23D';
             break;
         }
         Agenda::create($data);

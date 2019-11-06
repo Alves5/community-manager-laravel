@@ -21,7 +21,11 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
 
+    <!-- Uikit -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/css/uikit.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.min.js"></script>
 
+    <!-- FullCalendar -->
     <link href="{{ asset('css/fullCalendar/core-main.css') }}" rel='stylesheet' />
     <link href="{{ asset('css/fullCalendar/day-main.css') }}" rel='stylesheet' />
 
@@ -32,10 +36,27 @@
   </head>
   <body>
       <div class="container">
-        <div class="row">
-          <div id='calendar' class="col-md-10 offset-md-1"></div>
-        </div>
-      </div>
+          <div id='calendar' class="col-md-9 offset-md-1">
+              <!-- Uikit -->
+        @foreach($agenda as $gen)
+          <button id='desc{{$gen->id}}' style='display: none;' class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #offcanvas-flip{{$gen->id}}">Reveal</button>
+
+          <div id="offcanvas-flip{{$gen->id}}" uk-offcanvas="flip: flip;">
+              <div style='width: 300px;' class="uk-offcanvas-bar">
+                    <button class="uk-offcanvas-close" type="button" uk-close></button>
+                 
+                    <h3>{{$gen->titulo}}</h3>
+
+                    <p>{{$gen->descricao}}</p>
+                  
+              </div>
+          </div>
+        @endforeach
+          </div>
+
+        
+
+    </div>
 </body>
 <script>
 
@@ -43,7 +64,19 @@ document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
+      plugins: [ 'interaction', 'dayGrid', 'timeGrid'],
+      selectable: true,
+        eventLimit: true,
+        header: {
+          right: 'prev,next today',
+          left: 'title',
+      },
       locale: 'pt-br',
+      eventClick: function(info) {
+      var eventObj = info.event;
+        $("#desc"+eventObj.id).click();
+        // alert('Clicked ' + eventObj.title);
+    },
       events: [
           <?php 
             foreach($agenda as $gen){
@@ -55,20 +88,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 end: "<?php echo $gen["end_date"] ?>",
                 backgroundColor: "<?php echo $gen["color"] ?>",
                 borderColor: 'transparent',
-                textColor: '#'
+                textColor: '#fff'
               },
           <?php
             }
           ?>
       ],
-      plugins: [ 'interaction', 'dayGrid', 'timeGrid'],
-      selectable: true,
-      eventLimit: true,
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'timeGridDay',
-    },
       select: function(info) {
         (async () => {
 
