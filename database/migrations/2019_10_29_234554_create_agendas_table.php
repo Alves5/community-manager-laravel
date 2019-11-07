@@ -24,6 +24,7 @@ class CreateAgendasTable extends Migration
             $table->string('color');
             $table->date('start_date');
             $table->date('end_date');
+            $table->time('hora_criacao');
             $table->timestamps();
         });
     }

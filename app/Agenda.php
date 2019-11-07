@@ -16,7 +16,8 @@ class Agenda extends Model
         'equipamento',
         'color',
         'start_date',
-        'end_date'
+        'end_date',
+        'hora_criacao'
     ];
 
     public function getId(){return $this->id;}
@@ -29,4 +30,5 @@ class Agenda extends Model
     public function getColor(){return $this->color;}
     public function getStart_date(){return $this->start_date;}
     public function getEnd_date(){return $this->end_date;}
+    public function getHora_criacao(){return $this->hora_criacao;}
 }

@@ -36,26 +36,152 @@
   </head>
   <body>
       <div class="container">
-          <div id='calendar' class="col-md-9 offset-md-1">
+        <form action="" method="post" class='uk-position-top-right'>
+          <div class="uk-margin">
+            <div uk-form-custom="target: > * > span:first-child">
+                <select>
+                  <option value=''>Filtrar</option>
+                  <option value='mentoria'>Mentoria</option>
+                  <option value='eventos'>Eventos</option>
+                  <option value='cursos'>Cursos</option>
+                  <option value='oficinas'>Oficinas</option>
+                  <option value='reunioes'>Reuniões</option>
+                </select>
+                <button class="uk-button uk-button-default" type="button" tabindex="-1">
+                    <span></span>
+                    <span uk-icon="icon: chevron-down"></span>
+                </button>
+            </div>
+          </div>
+        </form>
+
+          <div id='calendar' style='margin: 5%;' class="col-md-9 offset-md-1">
               <!-- Uikit -->
         @foreach($agenda as $gen)
           <button id='desc{{$gen->id}}' style='display: none;' class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #offcanvas-flip{{$gen->id}}">Reveal</button>
 
           <div id="offcanvas-flip{{$gen->id}}" uk-offcanvas="flip: flip;">
               <div style='width: 300px;' class="uk-offcanvas-bar">
-                    <button class="uk-offcanvas-close" type="button" uk-close></button>
-                 
-                    <h3>{{$gen->titulo}}</h3>
 
-                    <p>{{$gen->descricao}}</p>
-                  
+                    <button class="uk-offcanvas-close" type="button" uk-close></button>
+                    <h4 class="uk-comment-title uk-margin-remove">{{$gen->titulo}}</h4>
+                    <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-top">
+                        <li>{{$gen->start_date}}</li>
+                        <li>{{$gen->hora_criacao}}</li>
+                    </ul>
+                    <div class="uk-comment-body">
+                      <p>{{$gen->descricao}}</p>
+                    </div>
+                    <ul uk-accordion>
+                      <li>
+                          <a class="uk-accordion-title" href="#">Atualizar</a>
+                          <div class="uk-accordion-content">
+
+                            <form action="{{ route('AtualizarEvento', $gen->id) }}" method='post'>
+                              @csrf
+                              <div class="uk-margin" action='' method='post'>
+                                  <div class="uk-inline">
+                                      <a class="uk-form-icon" href="#"><i class="far fa-edit"></i></a>
+                                      <input class="uk-input" type="text" name='titulo' placeholder='Adicionar título...' value='{{$gen->titulo}}'>
+                                  </div>
+                              </div>
+
+                              <div class="uk-margin">
+                                <div uk-form-custom="target: > * > span:first-child">
+                                    <select name='evento' required>
+                                      <option value=''>Add. o evento...</option>
+                                      <option value='mentoria'>Mentoria</option>
+                                      <option value='eventos'>Eventos</option>
+                                      <option value='cursos'>Cursos</option>
+                                      <option value='oficinas'>Oficinas</option>
+                                      <option value='reunioes'>Reuniões</option>
+                                    </select>
+                                    <button class="uk-button uk-button-default" type="button" tabindex="-1">
+                                        <span></span>
+                                    </button>
+                                </div>
+                              </div>
+
+                              <div class="uk-margin">
+                                <div uk-form-custom="target: > * > span:first-child">
+                                      <select name='mentor' required>
+                                        <option value=''>Add. mentor...</option>
+                                        <option value='luis'>Luiz Eduardo</option>
+                                        <option value='maruska'>Maruska</option>
+                                        <option value='marina'>Marina Lecas</option>
+                                        <option value='diego'>Diego Saulo</option>
+                                      </select>
+                                    <button class="uk-button uk-button-default" type="button" tabindex="-1">
+                                        <span></span>
+                                    </button>
+                                </div>
+                              </div>
+
+                              <div class="uk-margin">
+                                <div uk-form-custom="target: > * > span:first-child">
+                                      <select name='local' required>
+                                        <option value=''>Add. local...</option>
+                                        <option value='sala_1'>Sala 1</option>
+                                        <option value='sala_2'>Sala 2</option>
+                                        <option value='sala_3'>Sala 3</option>
+                                        <option value='launcher'>Launcher</option>
+                                      </select>
+                                    <button class="uk-button uk-button-default" type="button" tabindex="-1">
+                                        <span></span>
+                                    </button>
+                                </div>
+                              </div>
+
+                              <div class="uk-margin" action='' method='post'>
+                                  <div class="uk-inline">
+                                      <a class="uk-form-icon" href="#"><i class="far fa-edit"></i></a>
+                                      <input class="uk-input" type="text" name='descricao' placeholder='Adicionar descrição...' value='{{$gen->descricao}}'>
+                                  </div>
+                              </div>
+
+                              <div class="uk-margin">
+                                <div uk-form-custom="target: > * > span:first-child">
+                                      <select name='equipamento' required>
+                                        <option value=''>Add. equipamento</option>
+                                        <option value='monitor'>Monitor</option>
+                                        <option value='notebook_1'>Notebook 1</option>
+                                        <option value='notebook_2'>Notebook 2</option>
+                                        <option value='microfone'>Microfone</option>
+                                      </select>
+                                    <button class="uk-button uk-button-default" type="button" tabindex="-1">
+                                        <span></span>
+                                    </button>
+                                </div>
+                              </div>
+
+                              <div class="uk-margin">
+                                <input type='hidden' name='start_date' value='{{$gen->start_date}}' >
+                                <input type='hidden' name='end_date' value='{{$gen->end_date}}' >
+                                <input type='hidden' name='color' value='{{$gen->color}}'>
+                              </div>
+
+                              <button class="uk-button uk-button-default  ">Salvar</button>
+                            </form>
+
+                          </div>
+                      </li>
+                      <li>
+                          <a class="uk-accordion-title" href="#">Remover</a>
+                          <div class="uk-accordion-content">
+                            <div class="uk-comment-body">
+                              <p>Deseja realmente remover ?</p>
+                            </div>
+                            <p uk-margin>
+                              <a class="uk-button uk-button-danger" onclick='removerEvento({{$gen->id}});' href='javascript:function'>Remover</a>
+                            </p>
+                          </div>
+                      </li>
+                  </ul>
+
               </div>
           </div>
         @endforeach
           </div>
-
-        
-
     </div>
 </body>
 <script>
@@ -75,7 +201,6 @@ document.addEventListener('DOMContentLoaded', function() {
       eventClick: function(info) {
       var eventObj = info.event;
         $("#desc"+eventObj.id).click();
-        // alert('Clicked ' + eventObj.title);
     },
       events: [
           <?php 
@@ -95,6 +220,12 @@ document.addEventListener('DOMContentLoaded', function() {
           ?>
       ],
       select: function(info) {
+        var data = new Date();
+        var hora = data.getHours();   // 0-23
+        var min  = data.getMinutes(); // 0-59
+        var seg  = data.getSeconds();
+        var hora_criacao = hora + ':' + min + ':' + seg; 
+
         (async () => {
 
           const { value: agendar } = await Swal.fire({
@@ -144,12 +275,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     "</select>"+
                   "</div>"+
                   "<div class='form-group'>"+
-                    "<label>"+info.startStr+"</label>"+
-                  "</div>"+
-                  "<div class='form-group'>"+
                       "<input type='hidden' name='start_date' value='"+info.startStr+"' >"+
                       "<input type='hidden' name='end_date' value='"+info.endStr+"' >"+
                       "<input type='hidden' name='color'>"+
+                      "<input type='hidden' name='hora_criacao' value='"+hora_criacao+"' >"+
                   "</div>"+
                     "<input type='submit' class='btn btn-primary' value='Salvar'>"+
                 "</form>",
@@ -164,5 +293,8 @@ document.addEventListener('DOMContentLoaded', function() {
   calendar.render();
 });
 
+function removerEvento(id){
+  window.location.href = "/RemoverEvento/"+id;
+}
 </script>
 </html>

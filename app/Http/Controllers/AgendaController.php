@@ -12,7 +12,7 @@ class AgendaController extends Controller
         return view('agenda.index', compact('agenda'));
     }
     
-    public function adicionar(Request $request){
+    public function insert(Request $request){
         $request->validate([
             'titulo' => 'required',
             'evento' => 'required',
@@ -21,9 +21,8 @@ class AgendaController extends Controller
             'descricao' => 'required',
             'equipamento' => 'required',
         ]);
-        $data = $request->all();
-        
-        
+
+        $data = $request->all();   
         switch($request->evento){
             case 'mentoria':
                 $data['color'] = '#AEFB49';
@@ -35,13 +34,61 @@ class AgendaController extends Controller
                 $data['color'] = '#D67BFC';
             break;
             case 'oficinas':
-                $data['color'] = '#65E9FF';
+                $data['color'] = '#24CBFF';
             break;
             case 'reunioes':
                 $data['color'] = '#FFD23D';
             break;
         }
         Agenda::create($data);
+        return back();
+    }
+
+    public function update(Request $request, $id){
+        $request->validate([
+            'titulo' => 'required',
+            'evento' => 'required',
+            'mentor' => 'required',
+            'local' => 'required',
+            'descricao' => 'required',
+            'equipamento' => 'required',
+        ]);
+
+        $data = $request->all();
+        switch($request->evento){
+            case 'mentoria':
+                $data['color'] = '#AEFB49';
+            break;
+            case 'eventos':
+                $data['color'] = '#FF7171';
+            break;
+            case 'cursos':
+                $data['color'] = '#D67BFC';
+            break;
+            case 'oficinas':
+                $data['color'] = '#24CBFF';
+            break;
+            case 'reunioes':
+                $data['color'] = '#FFD23D';
+            break;
+        }
+
+        $agenda = Agenda::find($id);
+        $agenda->titulo = $data['titulo'];
+        $agenda->evento = $data['evento'];
+        $agenda->mentor = $data['mentor'];
+        $agenda->local = $data['local'];
+        $agenda->descricao = $data['descricao'];
+        $agenda->equipamento = $data['equipamento'];
+        $agenda->start_date = $data['start_date'];
+        $agenda->end_date = $data['end_date'];
+        $agenda->color = $data['color'];
+        $agenda->save();
+        return back();
+    }
+    public function remove($id){
+        $agenda = Agenda::find($id);
+        $agenda->delete();
         return back();
     }
 
