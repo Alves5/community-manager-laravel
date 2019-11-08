@@ -10,9 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Use Illuminate\Support\Facades\Input;
 Use App\Edital;
+use App\Agenda;
 
 Route::get('/', function () {
     return view('welcome');
@@ -63,7 +63,18 @@ Route::get('/Email', 'EmailController@home');
 Route::post('/SendEmail', 'EmailController@enviarEmail')->name('enviarEmail');
 
 //Rotas para a página agenda
-Route::get('/Agenda', 'AgendaController@index');
+Route::get('/Agenda', 'AgendaController@index')->name('agendaShow');
 Route::get('/AdicionarEvento', 'AgendaController@insert');
 Route::post('/AtualizarEvento/{id}', 'AgendaController@update')->name('AtualizarEvento');
 Route::get('/RemoverEvento/{id}', 'AgendaController@remove');
+Route::post('/Agenda', function(){
+    $a = Input::get('search_agenda');
+    if($a != ' '){
+        $agenda = Agenda::where('evento', 'LIKE' ,'%'.$a.'%')->get();
+        if(count($agenda) >= 1 ){
+            return view('agenda.index', compact('agenda'));
+        }
+        
+    }
+    return view('agenda.index');
+});

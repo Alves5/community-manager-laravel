@@ -40,7 +40,7 @@
                         </div>
                         <div>
                             <i class="fas fa-calendar-alt"></i>
-                            <a href="{{url('/Agenda')}}">Agenda</a>
+                            <a href="{{route('agendaShow')}}">Agenda</a>
                         </div>
                     </div>
                 </div>

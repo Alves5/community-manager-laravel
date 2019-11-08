@@ -35,17 +35,17 @@
     <script src="{{ asset('js/fullCalendar/pt-br.js') }}"></script>
   </head>
   <body>
-      <div class="container">
-        <form action="" method="post" class='uk-position-top-right'>
+        <!-- <form action="{{'/Agenda'}}" method="post" class='uk-position-top-right' name='formSearchAgenda'>
+          @csrf
           <div class="uk-margin">
             <div uk-form-custom="target: > * > span:first-child">
-                <select>
-                  <option value=''>Filtrar</option>
-                  <option value='mentoria'>Mentoria</option>
-                  <option value='eventos'>Eventos</option>
-                  <option value='cursos'>Cursos</option>
-                  <option value='oficinas'>Oficinas</option>
-                  <option value='reunioes'>Reuniões</option>
+                <select name='search_agenda'>
+                  <option onclick='pesquisaAgenda();' value=''>Filtrar</option>
+                  <option style='background-color: #AEFB49;' onclick='pesquisaAgenda();' value='mentoria'>Mentoria</option>
+                  <option style='background-color: #FF7171;' onclick='pesquisaAgenda();' value='eventos'>Eventos</option>
+                  <option style='background-color: #D67BFC;' onclick='pesquisaAgenda();' value='cursos'>Cursos</option>
+                  <option style='background-color: #24CBFF;' onclick='pesquisaAgenda();' value='oficinas'>Oficinas</option>
+                  <option style='background-color: #FFD23D;' onclick='pesquisaAgenda();' value='reunioes'>Reuniões</option>
                 </select>
                 <button class="uk-button uk-button-default" type="button" tabindex="-1">
                     <span></span>
@@ -53,30 +53,39 @@
                 </button>
             </div>
           </div>
-        </form>
-
-          <div id='calendar' style='margin: 5%;' class="col-md-9 offset-md-1">
-              <!-- Uikit -->
+        </form> -->
+  <div class="uk-container">
+    <div class="uk-text-center" uk-grid>
+      <div class='uk-width-1-6@m'>
+          <ul class="uk-nav uk-nav-default">
+            <li class="uk-nav-header">Header</li>
+            <li class="uk-nav-divider"></li>
+            <li><a href="#">Item</a></li>
+          </ul>
+      </div>
+    <div class="uk-width-expand@m">
+      <div id='calendar' class="uk-height-1-1 uk-margin-top">
+        <!-- Uikit -->
         @foreach($agenda as $gen)
-          <button id='desc{{$gen->id}}' style='display: none;' class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #offcanvas-flip{{$gen->id}}">Reveal</button>
-
-          <div id="offcanvas-flip{{$gen->id}}" uk-offcanvas="flip: flip;">
-              <div style='width: 300px;' class="uk-offcanvas-bar">
-
-                    <button class="uk-offcanvas-close" type="button" uk-close></button>
-                    <h4 class="uk-comment-title uk-margin-remove">{{$gen->titulo}}</h4>
-                    <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-top">
-                        <li>{{$gen->start_date}}</li>
-                        <li>{{$gen->hora_criacao}}</li>
-                    </ul>
-                    <div class="uk-comment-body">
-                      <p>{{$gen->descricao}}</p>
-                    </div>
-                    <ul uk-accordion>
-                      <li>
-                          <a class="uk-accordion-title" href="#">Atualizar</a>
-                          <div class="uk-accordion-content">
-
+        <button id='desc{{$gen->id}}' style='display: none;' class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #offcanvas-flip{{$gen->id}}">Reveal</button>
+        <div id="offcanvas-flip{{$gen->id}}" uk-offcanvas="flip: flip;">
+          <div style='width: 300px;' class="uk-offcanvas-bar">
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+            <h4 class="uk-comment-title uk-margin-remove">{{$gen->titulo}}</h4>
+            <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-top">
+              <li>{{$gen->start_date}}</li>
+              <li>{{$gen->hora_criacao}}</li>
+            </ul>
+            <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-top">
+              <li>{{$gen->evento}}</li>
+            </ul>
+            <div class="uk-comment-body">
+              <p>{{$gen->descricao}}</p>
+            </div>
+            <ul uk-accordion>
+              <li>
+                <a class="uk-accordion-title" href="#">Atualizar</a>
+                <div class="uk-accordion-content">
                             <form action="{{ route('AtualizarEvento', $gen->id) }}" method='post'>
                               @csrf
                               <div class="uk-margin" action='' method='post'>
@@ -163,26 +172,27 @@
                               <button class="uk-button uk-button-default  ">Salvar</button>
                             </form>
 
-                          </div>
-                      </li>
-                      <li>
-                          <a class="uk-accordion-title" href="#">Remover</a>
-                          <div class="uk-accordion-content">
-                            <div class="uk-comment-body">
-                              <p>Deseja realmente remover ?</p>
-                            </div>
-                            <p uk-margin>
-                              <a class="uk-button uk-button-danger" onclick='removerEvento({{$gen->id}});' href='javascript:function'>Remover</a>
-                            </p>
-                          </div>
-                      </li>
-                  </ul>
-
-              </div>
+                </div>
+              </li>
+              <li>
+                <a class="uk-accordion-title" href="#">Remover</a>
+                <div class="uk-accordion-content">
+                  <div class="uk-comment-body">
+                    <p>Deseja realmente remover ?</p>
+                    </div>
+                      <p uk-margin>
+                        <a class="uk-button uk-button-danger" onclick='removerEvento({{$gen->id}});' href='javascript:function'>Remover</a>
+                      </p>
+                    </div>
+              </li>
+            </ul>
           </div>
+        </div>
         @endforeach
-          </div>
+      </div>
     </div>
+  </div>
+</div>
 </body>
 <script>
 
@@ -198,6 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
           left: 'title',
       },
       locale: 'pt-br',
+      height: 590,
       eventClick: function(info) {
       var eventObj = info.event;
         $("#desc"+eventObj.id).click();
@@ -295,6 +306,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function removerEvento(id){
   window.location.href = "/RemoverEvento/"+id;
+}
+function pesquisaAgenda(){
+    document.forms['formSearchAgenda'].submit();
 }
 </script>
 </html>
