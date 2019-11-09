@@ -7,6 +7,27 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
+## Configurações para funcionamento correto do site
+    Inicialmente:
+        1 - git clone https://gitlab.com/daniel-A05/community-manager---laravel.git > entre na pasta
+        2 - composer install
+        3 - cp .env.example .env
+        4 - php artisan key:generate
+    
+    Para o funcionamento correto da Agenda
+        1 - composer require maddhatter/laravel-fullcalendar -> Terminal
+        2 - adicione a linha no arquivo config/app.php: MaddHatter\LaravelFullcalendar\ServiceProvider::class, -> isso dentro de 'providers'
+        3 - adicione a linha no arquivo config/app.php: 'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class, -> isso dentro de 'aliases'
+
+    Para a linguagem
+        1 - composer require lucascudo/laravel-pt-br-localization -> Terminal
+        2 - php artisan vendor:publish --tag=laravel-pt-br-localization -> Terminal
+        3 - Altere Linha 83 do arquivo config/app.php para: 'locale' => 'pt-BR',
+
+
+
+
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

@@ -54,15 +54,17 @@
             </div>
           </div>
         </form> -->
-  <div class="uk-container">
-    <div class="uk-text-center" uk-grid>
-      <div class='uk-width-1-6@m'>
+<div class="uk-container">
+  <div class="uk-text-center" uk-grid="masonry: true">
+
+      <div class='uk-width-1-6@m uk-flex uk-flex-center uk-flex-middle' style="height: 400px;">
           <ul class="uk-nav uk-nav-default">
             <li class="uk-nav-header">Header</li>
             <li class="uk-nav-divider"></li>
             <li><a href="#">Item</a></li>
           </ul>
       </div>
+
     <div class="uk-width-expand@m">
       <div id='calendar' class="uk-height-1-1 uk-margin-top">
         <!-- Uikit -->
@@ -200,15 +202,15 @@ document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
-      plugins: [ 'interaction', 'dayGrid', 'timeGrid'],
+      locale: 'pt-br',
+      plugins: [ 'interaction', 'dayGrid'],
       selectable: true,
-        eventLimit: true,
         header: {
           right: 'prev,next today',
           left: 'title',
       },
-      locale: 'pt-br',
       height: 590,
+      eventLimit: true,
       eventClick: function(info) {
       var eventObj = info.event;
         $("#desc"+eventObj.id).click();
