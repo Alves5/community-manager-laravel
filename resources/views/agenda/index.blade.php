@@ -54,21 +54,9 @@
             </div>
           </div>
         </form> -->
-<div class="uk-container">
-  <div class="uk-text-center" uk-grid="masonry: true">
 
-      <div class='uk-width-1-6@m uk-flex uk-flex-center uk-flex-middle' style="height: 400px;">
-          <ul class="uk-nav uk-nav-default">
-            <li class="uk-nav-header">Header</li>
-            <li class="uk-nav-divider"></li>
-            <li><a href="#">Item</a></li>
-          </ul>
-      </div>
-
-    <div class="uk-width-expand@m">
-      <div id='calendar' class="uk-height-1-1 uk-margin-top">
-        <!-- Uikit -->
-        @foreach($agenda as $gen)
+ <!-- Uikit -->
+ @foreach($agenda as $gen)
         <button id='desc{{$gen->id}}' style='display: none;' class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #offcanvas-flip{{$gen->id}}">Reveal</button>
         <div id="offcanvas-flip{{$gen->id}}" uk-offcanvas="flip: flip;">
           <div style='width: 300px;' class="uk-offcanvas-bar">
@@ -191,7 +179,22 @@
           </div>
         </div>
         @endforeach
+
+<div class="uk-container">
+  <div class="uk-text-center" uk-grid="masonry: true">
+
+      <div class='uk-width-1-6@m uk-flex uk-flex-center uk-flex-middle' style="height: 400px;">
+          <ul class="uk-nav uk-nav-default">
+            <li class="uk-nav-header">Header</li>
+            <li class="uk-nav-divider"></li>
+            <li><a href="#">Item</a></li>
+          </ul>
       </div>
+
+    <div class="uk-width-expand@m">
+
+      <div id='calendar' class="uk-height-1-1 uk-margin-top"></div>
+      
     </div>
   </div>
 </div>
