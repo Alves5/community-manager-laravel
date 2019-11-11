@@ -24,6 +24,7 @@
     <!-- Uikit -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/css/uikit.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit-icons.min.js"></script>
 
     <!-- FullCalendar -->
     <link href="{{ asset('css/fullCalendar/core-main.css') }}" rel='stylesheet' />
@@ -33,30 +34,28 @@
     <script src="{{ asset('js/fullCalendar/inte-main.js') }}"></script>
     <script src="{{ asset('js/fullCalendar/day-main.js') }}"></script>
     <script src="{{ asset('js/fullCalendar/pt-br.js') }}"></script>
+
+    <style>
+      .agenda-eventos{
+        border-radius: 5px;
+      }
+      .agenda-cor-evento{
+        position: relative;
+        width: 30px;
+        height: 6px;
+        margin: 4% 0 0 3%;
+        border-radius: 5px;
+      }
+      .agenda-data-evento{
+        position: relative;
+        font-size: 10px;
+        margin: 2% 2% 0 4%;
+      }
+    </style>
   </head>
   <body>
-        <!-- <form action="{{'/Agenda'}}" method="post" class='uk-position-top-right' name='formSearchAgenda'>
-          @csrf
-          <div class="uk-margin">
-            <div uk-form-custom="target: > * > span:first-child">
-                <select name='search_agenda'>
-                  <option onclick='pesquisaAgenda();' value=''>Filtrar</option>
-                  <option style='background-color: #AEFB49;' onclick='pesquisaAgenda();' value='mentoria'>Mentoria</option>
-                  <option style='background-color: #FF7171;' onclick='pesquisaAgenda();' value='eventos'>Eventos</option>
-                  <option style='background-color: #D67BFC;' onclick='pesquisaAgenda();' value='cursos'>Cursos</option>
-                  <option style='background-color: #24CBFF;' onclick='pesquisaAgenda();' value='oficinas'>Oficinas</option>
-                  <option style='background-color: #FFD23D;' onclick='pesquisaAgenda();' value='reunioes'>Reuniões</option>
-                </select>
-                <button class="uk-button uk-button-default" type="button" tabindex="-1">
-                    <span></span>
-                    <span uk-icon="icon: chevron-down"></span>
-                </button>
-            </div>
-          </div>
-        </form> -->
-
  <!-- Uikit -->
- @foreach($agenda as $gen)
+      @foreach($agenda as $gen)
         <button id='desc{{$gen->id}}' style='display: none;' class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #offcanvas-flip{{$gen->id}}">Reveal</button>
         <div id="offcanvas-flip{{$gen->id}}" uk-offcanvas="flip: flip;">
           <div style='width: 300px;' class="uk-offcanvas-bar">
@@ -178,39 +177,54 @@
             </ul>
           </div>
         </div>
-        @endforeach
+      @endforeach
 
-<div class="uk-container">
   <div class="uk-text-center" uk-grid="masonry: true">
+      <div class='uk-width-1-6@m uk-margin-left uk-margin-large-top' style="height: 400px;">
+          <ul class="uk-nav uk-nav-default uk-width-expand@m">
+            <!-- <li class="uk-nav-header"></li>
+            <li class="uk-nav-divider"></li> -->
+              <div class='uk-width-expand@m'>
+                <form>
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: search"></a>
+                            <input class="uk-input" type="search">
+                        </div>
+                    </div>
+                </form>
 
-      <div class='uk-width-1-6@m uk-flex uk-flex-center uk-flex-middle' style="height: 400px;">
-          <ul class="uk-nav uk-nav-default">
-            <li class="uk-nav-header">Header</li>
-            <li class="uk-nav-divider"></li>
-            <li><a href="#">Item</a></li>
+                <div class='uk-panel uk-panel-scrollable' style='position: relative; resize: none; height: 400px; width: 210px;'>
+                    @foreach($agenda as $gen => $value)
+                      <div class="uk-margin">    
+                        <div class="uk-card agenda-eventos uk-card-default uk-card-body uk-card-small">
+                          <span class='agenda-cor-evento uk-position-top-left' style='background-color: {{$value->color}};'></span>
+                          <span class='agenda-data-evento uk-position-top-right'>{{$value->start_date}}</span>
+                            {{$value->titulo}}
+                        </div>
+                      </div>
+                    @endforeach
+                </div>
+            </div>
           </ul>
       </div>
 
-    <div class="uk-width-expand@m">
-
-      <div id='calendar' class="uk-height-1-1 uk-margin-top"></div>
-      
-    </div>
+      <div class="uk-width-expand@m uk-margin-large-right">
+        <div id='calendar' class="uk-height-1-1 uk-margin-top"></div> 
+      </div>
   </div>
-</div>
 </body>
 <script>
-
 document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
       locale: 'pt-br',
-      plugins: [ 'interaction', 'dayGrid'],
+      plugins: ['interaction', 'dayGrid'],
       selectable: true,
-        header: {
-          right: 'prev,next today',
-          left: 'title',
+      header: { 
+       right: 'prev,next today',
+       left: 'title',
       },
       height: 590,
       eventLimit: true,
@@ -240,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var hora = data.getHours();   // 0-23
         var min  = data.getMinutes(); // 0-59
         var seg  = data.getSeconds();
-        var hora_criacao = hora + ':' + min + ':' + seg; 
+        var hora_criacao = hora + ':' + min + ':' + seg;
 
         (async () => {
 
@@ -305,7 +319,6 @@ document.addEventListener('DOMContentLoaded', function() {
        
       }
   });
-
   calendar.render();
 });
 
