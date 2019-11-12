@@ -25,6 +25,7 @@ class CreateAgendasTable extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->time('hora_criacao');
+            $table->tinyInteger('privado')->default(0);
             $table->timestamps();
         });
     }

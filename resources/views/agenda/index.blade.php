@@ -36,6 +36,53 @@
     <script src="{{ asset('js/fullCalendar/pt-br.js') }}"></script>
 
     <style>
+    /* CSS da página da agenda */
+      #agenda{
+          position: relative;
+          width: 350px;
+          left: 60px;
+      }
+      .form-agenda > input[type=text]{
+          position: relative;
+          width: 290px;
+          color: #000;
+          border: none;
+          border-radius: 0px;
+          border-bottom: solid 1px #696969;
+          box-shadow: none;
+      }
+      .form-agenda > input[type=color]{
+          position: relative;
+          width: 290px;
+          border: none;
+          border-radius: 0px;
+          border-bottom: solid 1px #696969;
+          box-shadow: none;
+      }
+      .form-agenda > select{
+          position: relative;
+          width: 290px;
+          color: #000;
+          border: none;
+          border-radius: 0px;
+          border-bottom: solid 1px #696969;
+          -moz-appearance: none;
+          -webkit-appearance: none;
+      }
+      .form-agenda > select::-ms-expand{
+          display: none;
+      }
+      .form-agenda > select:focus{
+          box-shadow: none;
+      }
+      .form-agenda > .dropdown > button{
+          text-align: justify;
+          box-shadow: none;
+          border: none;
+      }
+      .form-agenda > .dropdown > .dropdown-menu {
+          box-shadow: none;
+      }
       .agenda-eventos{
         border-radius: 5px;
       }
@@ -56,7 +103,8 @@
   <body>
  <!-- Uikit -->
       @foreach($agenda as $gen)
-        <button id='desc{{$gen->id}}' style='display: none;' class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #offcanvas-flip{{$gen->id}}">Reveal</button>
+        <button id='desc{{$gen->id}}' style='display: none;' class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #offcanvas-flip{{$gen->id}}"></button>
+
         <div id="offcanvas-flip{{$gen->id}}" uk-offcanvas="flip: flip;">
           <div style='width: 300px;' class="uk-offcanvas-bar">
             <button class="uk-offcanvas-close" type="button" uk-close></button>
@@ -104,10 +152,10 @@
                                 <div uk-form-custom="target: > * > span:first-child">
                                       <select name='mentor' required>
                                         <option value=''>Add. mentor...</option>
-                                        <option value='luis'>Luiz Eduardo</option>
-                                        <option value='maruska'>Maruska</option>
-                                        <option value='marina'>Marina Lecas</option>
-                                        <option value='diego'>Diego Saulo</option>
+                                        <option value='Luiz Eduardo'>Luiz Eduardo</option>
+                                        <option value='Maruska'>Maruska</option>
+                                        <option value='Marina'>Marina Lecas</option>
+                                        <option value='Diego'>Diego Saulo</option>
                                       </select>
                                     <button class="uk-button uk-button-default" type="button" tabindex="-1">
                                         <span></span>
@@ -119,9 +167,9 @@
                                 <div uk-form-custom="target: > * > span:first-child">
                                       <select name='local' required>
                                         <option value=''>Add. local...</option>
-                                        <option value='sala_1'>Sala 1</option>
-                                        <option value='sala_2'>Sala 2</option>
-                                        <option value='sala_3'>Sala 3</option>
+                                        <option value='sala 1'>Sala 1</option>
+                                        <option value='sala 2'>Sala 2</option>
+                                        <option value='sala 3'>Sala 3</option>
                                         <option value='launcher'>Launcher</option>
                                       </select>
                                     <button class="uk-button uk-button-default" type="button" tabindex="-1">
@@ -142,8 +190,8 @@
                                       <select name='equipamento' required>
                                         <option value=''>Add. equipamento</option>
                                         <option value='monitor'>Monitor</option>
-                                        <option value='notebook_1'>Notebook 1</option>
-                                        <option value='notebook_2'>Notebook 2</option>
+                                        <option value='notebook 1'>Notebook 1</option>
+                                        <option value='notebook 2'>Notebook 2</option>
                                         <option value='microfone'>Microfone</option>
                                       </select>
                                     <button class="uk-button uk-button-default" type="button" tabindex="-1">
@@ -157,7 +205,17 @@
                                 <input type='hidden' name='end_date' value='{{$gen->end_date}}' >
                                 <input type='hidden' name='color' value='{{$gen->color}}'>
                               </div>
-
+                              <!-- <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                                <label><input class="uk-radio" type="radio" name="radio2" checked> A</label>
+                                <label><input class="uk-radio" type="radio" name="radio2"> B</label>
+                              </div>   -->
+                              <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                                  @if($gen->privado)
+                                    <label><input class="uk-checkbox" type="checkbox" name='privado' value='1' checked>Privado</label>
+                                  @else
+                                    <label><input class="uk-checkbox" type="checkbox" name='privado' value='1'>Privado</label>
+                                  @endif
+                              </div>
                               <button class="uk-button uk-button-default  ">Salvar</button>
                             </form>
 
@@ -189,7 +247,7 @@
                     <div class="uk-margin">
                         <div class="uk-inline">
                             <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: search"></a>
-                            <input class="uk-input" type="search">
+                            <input class="uk-input" type="search" placeholder='Em desenvolvimento'>
                         </div>
                     </div>
                 </form>
@@ -197,7 +255,7 @@
                 <div class='uk-panel uk-panel-scrollable' style='position: relative; resize: none; height: 400px; width: 210px;'>
                     @foreach($agenda as $gen => $value)
                       <div class="uk-margin">    
-                        <div class="uk-card agenda-eventos uk-card-default uk-card-body uk-card-small">
+                        <div id='#desc{{$value->id}}' uk-toggle="target: #offcanvas-flip{{$value->id}}" class="uk-card agenda-eventos uk-card-default uk-card-body uk-card-small">
                           <span class='agenda-cor-evento uk-position-top-left' style='background-color: {{$value->color}};'></span>
                           <span class='agenda-data-evento uk-position-top-right'>{{$value->start_date}}</span>
                             {{$value->titulo}}
@@ -229,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
       height: 590,
       eventLimit: true,
       eventClick: function(info) {
-      var eventObj = info.event;
+        var eventObj = info.event;
         $("#desc"+eventObj.id).click();
     },
       events: [
@@ -255,62 +313,92 @@ document.addEventListener('DOMContentLoaded', function() {
         var min  = data.getMinutes(); // 0-59
         var seg  = data.getSeconds();
         var hora_criacao = hora + ':' + min + ':' + seg;
+        var start_date = $.fullCalendar.formatRange(info.startStr, 'MMMM D YYYY');
 
         (async () => {
 
           const { value: agendar } = await Swal.fire({
             html:
               "<form id='agenda' method='get' action='/AdicionarEvento'>"+
-                "<div class='form-group form-agenda'>"+
-                  "<input type='text' id='titulo' name='titulo' value='Adicionar titulo...' class='form-control' required>"+
-                "</div>"+
-                "<div class='form-group form-agenda'>"+
-                  "<select name='evento' id='evento' class='form-control' required>"+
-                      "<option value=''>Escolha o evento...</option>"+
-                      "<option value='mentoria'>Mentoria</option>"+
-                      "<option value='eventos'>Eventos</option>"+
-                      "<option value='cursos'>Cursos</option>"+
-                      "<option value='oficinas'>Oficinas</option>"+
-                      "<option value='reunioes'>Reuniões</option>"+
-                    "</select>"+
-                "</div>"+
-                "<div class='form-group form-agenda'>"+
-                    "<select name='mentor' id='' class='form-control' required>"+
-                      "<option value=''>Adicionar mentor...</option>"+
-                      "<option value='luis'>Luiz Eduardo</option>"+
-                      "<option value='maruska'>Maruska</option>"+
-                      "<option value='marina'>Marina Lecas</option>"+
-                      "<option value='diego'>Diego Saulo</option>"+
-                    "</select>"+
-                "</div>"+
-                "<div class='form-group form-agenda'>"+
-                  "<select name='local' id='' class='form-control' required>"+
-                    "<option value=''>Adicionar local...</option>"+
-                    "<option value='sala_1'>Sala 1</option>"+
-                    "<option value='sala_2'>Sala 2</option>"+
-                    "<option value='sala_3'>Sala 3</option>"+
-                    "<option value='launcher'>Launcher</option>"+
-                  "</select>"+
-                "</div>"+
-                "<div class='form-group form-agenda'>"+
-                  "<input type='text' name='descricao' value='Adicionar descrição...' class='form-control' required>"+
-                "</div>"+
-                "<div class='form-group form-agenda'>"+
-                  "<select name='equipamento' id='' class='form-control' required>"+
-                      "<option value=''>Adicionar equipamento...</option>"+
-                      "<option value='monitor'>Monitor</option>"+
-                      "<option value='notebook_1'>Notebook 1</option>"+
-                      "<option value='notebook_2'>Notebook 2</option>"+
-                      "<option value='microfone'>Microfone</option>"+
-                    "</select>"+
+                "<div class='uk-margin' action='' method='post'>"+
+                  "<div class='uk-inline'>"+
+                    "<a class='uk-form-icon' href='#'><i class='far fa-edit'></i></a>"+
+                    "<input class='uk-input' type='text' name='titulo' placeholder='Adicionar título...'>"+
                   "</div>"+
-                  "<div class='form-group'>"+
-                      "<input type='hidden' name='start_date' value='"+info.startStr+"' >"+
-                      "<input type='hidden' name='end_date' value='"+info.endStr+"' >"+
-                      "<input type='hidden' name='color'>"+
-                      "<input type='hidden' name='hora_criacao' value='"+hora_criacao+"' >"+
-                  "</div>"+
-                    "<input type='submit' class='btn btn-primary' value='Salvar'>"+
+                "</div>"+
+                              "<div class='uk-margin'>"+
+                                "<div uk-form-custom='target: > * > span:first-child'>"+
+                                    "<select name='evento' required>"+
+                                      "<option value=''>Add. o evento...</option>"+
+                                      "<option value='mentoria'>Mentoria</option>"+
+                                      "<option value='eventos'>Eventos</option>"+
+                                      "<option value='cursos'>Cursos</option>"+
+                                      "<option value='oficinas'>Oficinas</option>"+
+                                      "<option value='reunioes'>Reuniões</option>"+
+                                    "</select>"+
+                                    "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
+                                        "<span></span>"+
+                                    "</button>"+
+                                "</div>"+
+                              "</div>"+
+                              "<div class='uk-margin'>"+
+                                "<div uk-form-custom='target: > * > span:first-child'>"+
+                                      "<select name='mentor' required>"+
+                                        "<option value=''>Add. mentor...</option>"+
+                                        "<option value='Luiz Eduardo'>Luiz Eduardo</option>"+
+                                        "<option value='Maruska'>Maruska</option>"+
+                                        "<option value='Marina'>Marina Lecas</option>"+
+                                        "<option value='Diego'>Diego Saulo</option>"+
+                                      "</select>"+
+                                    "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
+                                        "<span></span>"+
+                                    "</button>"+
+                                "</div>"+
+                              "</div>"+
+                              "<div class='uk-margin'>"+
+                                "<div uk-form-custom='target: > * > span:first-child'>"+
+                                      "<select name='local' required>"+
+                                        "<option value=''>Add. local...</option>"+
+                                        "<option value='sala 1'>Sala 1</option>"+
+                                        "<option value='sala 2'>Sala 2</option>"+
+                                        "<option value='sala 3'>Sala 3</option>"+
+                                        "<option value='launcher'>Launcher</option>"+
+                                      "</select>"+
+                                    "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
+                                        "<span></span>"+
+                                    "</button>"+
+                                "</div>"+
+                              "</div>"+
+                              "<div class='uk-margin' action='' method='post'>"+
+                                  "<div class='uk-inline'>"+
+                                      "<a class='uk-form-icon' href='#'><i class='far fa-edit'></i></a>"+
+                                      "<input class='uk-input' type='text' name='descricao' placeholder='Adicionar descrição...'>"+
+                                  "</div>"+
+                              "</div>"+
+                              "<div class='uk-margin'>"+
+                                "<div uk-form-custom='target: > * > span:first-child'>"+
+                                      "<select name='equipamento' required>"+
+                                        "<option value=''>Add. equipamento</option>"+
+                                        "<option value='monitor'>Monitor</option>"+
+                                        "<option value='notebook 1'>Notebook 1</option>"+
+                                        "<option value='notebook 2'>Notebook 2</option>"+
+                                        "<option value='microfone'>Microfone</option>"+
+                                      "</select>"+
+                                    "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
+                                        "<span></span>"+
+                                    "</button>"+
+                                "</div>"+
+                              "</div>"+
+                              "<div class='uk-margin'>"+
+                                "<input type='hidden' name='start_date' value='"+start_date+"' >"+
+                                "<input type='hidden' name='end_date' value='"+info.endStr+"' >"+
+                                "<input type='hidden' name='color'>"+
+                                "<input type='hidden' name='hora_criacao' value='"+hora_criacao+"' >"+
+                              "</div>"+
+                              "<div class='uk-margin uk-grid-small uk-child-width-auto uk-grid'>"+        
+                                "<label><input class='uk-checkbox' type='checkbox' name='privado' value='1'>Privado</label>"+
+                              "</div>"+
+                              "<button class='uk-button uk-button-default'>Salvar</button>"+
                 "</form>",
               showConfirmButton: false
           })

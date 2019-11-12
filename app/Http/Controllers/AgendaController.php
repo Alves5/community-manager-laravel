@@ -25,7 +25,7 @@ class AgendaController extends Controller
         $data = $request->all();   
         switch($request->evento){
             case 'mentoria':
-                $data['color'] = '#AEFB49';
+                $data['color'] = '#84E600';
             break;
             case 'eventos':
                 $data['color'] = '#FF7171';
@@ -57,7 +57,7 @@ class AgendaController extends Controller
         $data = $request->all();
         switch($request->evento){
             case 'mentoria':
-                $data['color'] = '#AEFB49';
+                $data['color'] = '#84E600';
             break;
             case 'eventos':
                 $data['color'] = '#FF7171';
@@ -72,6 +72,11 @@ class AgendaController extends Controller
                 $data['color'] = '#FFD23D';
             break;
         }
+        if ($request->privado == 0) {
+            $data['privado'] = 0;
+        }else{
+            $data['privado'] = 1;
+        }
 
         $agenda = Agenda::find($id);
         $agenda->titulo = $data['titulo'];
@@ -83,6 +88,7 @@ class AgendaController extends Controller
         $agenda->start_date = $data['start_date'];
         $agenda->end_date = $data['end_date'];
         $agenda->color = $data['color'];
+        $agenda->privado = $data['privado'];
         $agenda->save();
         return back();
     }
