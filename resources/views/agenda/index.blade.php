@@ -29,6 +29,7 @@
     <!-- FullCalendar -->
     <link href="{{ asset('css/fullCalendar/core-main.css') }}" rel='stylesheet' />
     <link href="{{ asset('css/fullCalendar/day-main.css') }}" rel='stylesheet' />
+    <script src="{{ asset('js/fullCalendar/moment.min.js') }}"></script>
 
     <script src="{{ asset('js/fullCalendar/core-main.js') }}"></script>
     <script src="{{ asset('js/fullCalendar/inte-main.js') }}"></script>
@@ -93,10 +94,9 @@
         margin: 4% 0 0 3%;
         border-radius: 5px;
       }
-      .agenda-data-evento{
+      .agenda-mais-evento{
         position: relative;
-        font-size: 10px;
-        margin: 2% 2% 0 4%;
+        margin: 0 3% 0 4%;
       }
     </style>
   </head>
@@ -255,9 +255,9 @@
                 <div class='uk-panel uk-panel-scrollable' style='position: relative; resize: none; height: 400px; width: 210px;'>
                     @foreach($agenda as $gen => $value)
                       <div class="uk-margin">    
-                        <div id='#desc{{$value->id}}' uk-toggle="target: #offcanvas-flip{{$value->id}}" class="uk-card agenda-eventos uk-card-default uk-card-body uk-card-small">
+                        <div class="uk-card agenda-eventos uk-card-default uk-card-body uk-card-small">
                           <span class='agenda-cor-evento uk-position-top-left' style='background-color: {{$value->color}};'></span>
-                          <span class='agenda-data-evento uk-position-top-right'>{{$value->start_date}}</span>
+                          <span id='#desc{{$value->id}}' uk-toggle="target: #offcanvas-flip{{$value->id}}" class='agenda-mais-evento uk-position-top-right'><i class="fas fa-ellipsis-h"></i></span>
                             {{$value->titulo}}
                         </div>
                       </div>
@@ -309,101 +309,110 @@ document.addEventListener('DOMContentLoaded', function() {
       ],
       select: function(info) {
         var data = new Date();
+        var dia = data.getDate();
+        var mes = data.getMonth();
+        var ano = data.getFullYear();
         var hora = data.getHours();   // 0-23
         var min  = data.getMinutes(); // 0-59
         var seg  = data.getSeconds();
+        var today = dia + '/' + (mes+1) + '/' + ano;
         var hora_criacao = hora + ':' + min + ':' + seg;
-        var start_date = $.fullCalendar.formatRange(info.startStr, 'MMMM D YYYY');
+        var start_date = info.startStr;
+        start_date = moment(start_date).format('DD/MM/YYYY');
+        if(start_date < today){
+            alert('Errado');
+        }else{
+          alert('certo');
+        }
+        // (async () => {
 
-        (async () => {
+        //   const { value: agendar } = await Swal.fire({
+        //     html:
+        //       "<form id='agenda' method='get' action='/AdicionarEvento'>"+
+        //         "<div class='uk-margin' action='' method='post'>"+
+        //           "<div class='uk-inline'>"+
+        //             "<a class='uk-form-icon' href='#'><i class='far fa-edit'></i></a>"+
+        //             "<input class='uk-input' type='text' name='titulo' placeholder='Adicionar título...'>"+
+        //           "</div>"+
+        //         "</div>"+
+        //                       "<div class='uk-margin'>"+
+        //                         "<div uk-form-custom='target: > * > span:first-child'>"+
+        //                             "<select name='evento' required>"+
+        //                               "<option value=''>Add. o evento...</option>"+
+        //                               "<option value='mentoria'>Mentoria</option>"+
+        //                               "<option value='eventos'>Eventos</option>"+
+        //                               "<option value='cursos'>Cursos</option>"+
+        //                               "<option value='oficinas'>Oficinas</option>"+
+        //                               "<option value='reunioes'>Reuniões</option>"+
+        //                             "</select>"+
+        //                             "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
+        //                                 "<span></span>"+
+        //                             "</button>"+
+        //                         "</div>"+
+        //                       "</div>"+
+        //                       "<div class='uk-margin'>"+
+        //                         "<div uk-form-custom='target: > * > span:first-child'>"+
+        //                               "<select name='mentor' required>"+
+        //                                 "<option value=''>Add. mentor...</option>"+
+        //                                 "<option value='Luiz Eduardo'>Luiz Eduardo</option>"+
+        //                                 "<option value='Maruska'>Maruska</option>"+
+        //                                 "<option value='Marina'>Marina Lecas</option>"+
+        //                                 "<option value='Diego'>Diego Saulo</option>"+
+        //                               "</select>"+
+        //                             "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
+        //                                 "<span></span>"+
+        //                             "</button>"+
+        //                         "</div>"+
+        //                       "</div>"+
+        //                       "<div class='uk-margin'>"+
+        //                         "<div uk-form-custom='target: > * > span:first-child'>"+
+        //                               "<select name='local' required>"+
+        //                                 "<option value=''>Add. local...</option>"+
+        //                                 "<option value='sala 1'>Sala 1</option>"+
+        //                                 "<option value='sala 2'>Sala 2</option>"+
+        //                                 "<option value='sala 3'>Sala 3</option>"+
+        //                                 "<option value='launcher'>Launcher</option>"+
+        //                               "</select>"+
+        //                             "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
+        //                                 "<span></span>"+
+        //                             "</button>"+
+        //                         "</div>"+
+        //                       "</div>"+
+        //                       "<div class='uk-margin' action='' method='post'>"+
+        //                           "<div class='uk-inline'>"+
+        //                               "<a class='uk-form-icon' href='#'><i class='far fa-edit'></i></a>"+
+        //                               "<input class='uk-input' type='text' name='descricao' placeholder='Adicionar descrição...'>"+
+        //                           "</div>"+
+        //                       "</div>"+
+        //                       "<div class='uk-margin'>"+
+        //                         "<div uk-form-custom='target: > * > span:first-child'>"+
+        //                               "<select name='equipamento' required>"+
+        //                                 "<option value=''>Add. equipamento</option>"+
+        //                                 "<option value='monitor'>Monitor</option>"+
+        //                                 "<option value='notebook 1'>Notebook 1</option>"+
+        //                                 "<option value='notebook 2'>Notebook 2</option>"+
+        //                                 "<option value='microfone'>Microfone</option>"+
+        //                               "</select>"+
+        //                             "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
+        //                                 "<span></span>"+
+        //                             "</button>"+
+        //                         "</div>"+
+        //                       "</div>"+
+        //                       "<div class='uk-margin'>"+
+        //                         "<input type='hidden' name='start_date' value='"+info.startStr+"' >"+
+        //                         "<input type='hidden' name='end_date' value='"+info.endStr+"' >"+
+        //                         "<input type='hidden' name='color'>"+
+        //                         "<input type='hidden' name='hora_criacao' value='"+hora_criacao+"' >"+
+        //                       "</div>"+
+        //                       "<div class='uk-margin uk-grid-small uk-child-width-auto uk-grid'>"+        
+        //                         "<label><input class='uk-checkbox' type='checkbox' name='privado' value='1'>Privado</label>"+
+        //                       "</div>"+
+        //                       "<button class='uk-button uk-button-default'>Salvar</button>"+
+        //         "</form>",
+        //       showConfirmButton: false
+        //   })
 
-          const { value: agendar } = await Swal.fire({
-            html:
-              "<form id='agenda' method='get' action='/AdicionarEvento'>"+
-                "<div class='uk-margin' action='' method='post'>"+
-                  "<div class='uk-inline'>"+
-                    "<a class='uk-form-icon' href='#'><i class='far fa-edit'></i></a>"+
-                    "<input class='uk-input' type='text' name='titulo' placeholder='Adicionar título...'>"+
-                  "</div>"+
-                "</div>"+
-                              "<div class='uk-margin'>"+
-                                "<div uk-form-custom='target: > * > span:first-child'>"+
-                                    "<select name='evento' required>"+
-                                      "<option value=''>Add. o evento...</option>"+
-                                      "<option value='mentoria'>Mentoria</option>"+
-                                      "<option value='eventos'>Eventos</option>"+
-                                      "<option value='cursos'>Cursos</option>"+
-                                      "<option value='oficinas'>Oficinas</option>"+
-                                      "<option value='reunioes'>Reuniões</option>"+
-                                    "</select>"+
-                                    "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
-                                        "<span></span>"+
-                                    "</button>"+
-                                "</div>"+
-                              "</div>"+
-                              "<div class='uk-margin'>"+
-                                "<div uk-form-custom='target: > * > span:first-child'>"+
-                                      "<select name='mentor' required>"+
-                                        "<option value=''>Add. mentor...</option>"+
-                                        "<option value='Luiz Eduardo'>Luiz Eduardo</option>"+
-                                        "<option value='Maruska'>Maruska</option>"+
-                                        "<option value='Marina'>Marina Lecas</option>"+
-                                        "<option value='Diego'>Diego Saulo</option>"+
-                                      "</select>"+
-                                    "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
-                                        "<span></span>"+
-                                    "</button>"+
-                                "</div>"+
-                              "</div>"+
-                              "<div class='uk-margin'>"+
-                                "<div uk-form-custom='target: > * > span:first-child'>"+
-                                      "<select name='local' required>"+
-                                        "<option value=''>Add. local...</option>"+
-                                        "<option value='sala 1'>Sala 1</option>"+
-                                        "<option value='sala 2'>Sala 2</option>"+
-                                        "<option value='sala 3'>Sala 3</option>"+
-                                        "<option value='launcher'>Launcher</option>"+
-                                      "</select>"+
-                                    "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
-                                        "<span></span>"+
-                                    "</button>"+
-                                "</div>"+
-                              "</div>"+
-                              "<div class='uk-margin' action='' method='post'>"+
-                                  "<div class='uk-inline'>"+
-                                      "<a class='uk-form-icon' href='#'><i class='far fa-edit'></i></a>"+
-                                      "<input class='uk-input' type='text' name='descricao' placeholder='Adicionar descrição...'>"+
-                                  "</div>"+
-                              "</div>"+
-                              "<div class='uk-margin'>"+
-                                "<div uk-form-custom='target: > * > span:first-child'>"+
-                                      "<select name='equipamento' required>"+
-                                        "<option value=''>Add. equipamento</option>"+
-                                        "<option value='monitor'>Monitor</option>"+
-                                        "<option value='notebook 1'>Notebook 1</option>"+
-                                        "<option value='notebook 2'>Notebook 2</option>"+
-                                        "<option value='microfone'>Microfone</option>"+
-                                      "</select>"+
-                                    "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
-                                        "<span></span>"+
-                                    "</button>"+
-                                "</div>"+
-                              "</div>"+
-                              "<div class='uk-margin'>"+
-                                "<input type='hidden' name='start_date' value='"+start_date+"' >"+
-                                "<input type='hidden' name='end_date' value='"+info.endStr+"' >"+
-                                "<input type='hidden' name='color'>"+
-                                "<input type='hidden' name='hora_criacao' value='"+hora_criacao+"' >"+
-                              "</div>"+
-                              "<div class='uk-margin uk-grid-small uk-child-width-auto uk-grid'>"+        
-                                "<label><input class='uk-checkbox' type='checkbox' name='privado' value='1'>Privado</label>"+
-                              "</div>"+
-                              "<button class='uk-button uk-button-default'>Salvar</button>"+
-                "</form>",
-              showConfirmButton: false
-          })
-
-        })()
+        // })()
        
       }
   });
