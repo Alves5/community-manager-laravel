@@ -307,112 +307,117 @@ document.addEventListener('DOMContentLoaded', function() {
             }
           ?>
       ],
-      select: function(info) {
+      select: function(event, cell) {
         var data = new Date();
-        var dia = data.getDate();
-        var mes = data.getMonth();
-        var ano = data.getFullYear();
         var hora = data.getHours();   // 0-23
         var min  = data.getMinutes(); // 0-59
         var seg  = data.getSeconds();
-        var today = dia + '/' + (mes+1) + '/' + ano;
         var hora_criacao = hora + ':' + min + ':' + seg;
-        var start_date = info.startStr;
-        start_date = moment(start_date).format('DD/MM/YYYY');
-        if(start_date < today){
-            alert('Errado');
+
+        var mesAtual = data.getMonth()+1;
+        var mesClicado = event.start.getMonth()+1;
+
+        var today = moment(data).format('YYYY/MM/DD');
+
+        var start_date = event.start;
+        start_date = moment(start_date).format('YYYY/MM/DD');
+        var end_date = event.end;
+        end_date = moment(end_date).format('YYYY/MM/DD');
+        if(mesClicado < mesAtual || start_date < today){
+            //$(".fc-day").css("background", "red");
+            //Procurar atributo de cor de fundo
+            return false;
         }else{
-          alert('certo');
+          (async () => {
+
+            const { value: agendar } = await Swal.fire({
+              html:
+                "<form id='agenda' method='get' action='/AdicionarEvento'>"+
+                  "<div class='uk-margin' action='' method='post'>"+
+                    "<div class='uk-inline'>"+
+                      "<a class='uk-form-icon' href='#'><i class='far fa-edit'></i></a>"+
+                      "<input class='uk-input' type='text' name='titulo' placeholder='Adicionar título...'>"+
+                    "</div>"+
+                  "</div>"+
+                                "<div class='uk-margin'>"+
+                                  "<div uk-form-custom='target: > * > span:first-child'>"+
+                                      "<select name='evento' required>"+
+                                        "<option value=''>Add. o evento...</option>"+
+                                        "<option value='mentoria'>Mentoria</option>"+
+                                        "<option value='eventos'>Eventos</option>"+
+                                        "<option value='cursos'>Cursos</option>"+
+                                        "<option value='oficinas'>Oficinas</option>"+
+                                        "<option value='reunioes'>Reuniões</option>"+
+                                      "</select>"+
+                                      "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
+                                          "<span></span>"+
+                                      "</button>"+
+                                  "</div>"+
+                                "</div>"+
+                                "<div class='uk-margin'>"+
+                                  "<div uk-form-custom='target: > * > span:first-child'>"+
+                                        "<select name='mentor' required>"+
+                                          "<option value=''>Add. mentor...</option>"+
+                                          "<option value='Luiz Eduardo'>Luiz Eduardo</option>"+
+                                          "<option value='Maruska'>Maruska</option>"+
+                                          "<option value='Marina'>Marina Lecas</option>"+
+                                          "<option value='Diego'>Diego Saulo</option>"+
+                                        "</select>"+
+                                      "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
+                                          "<span></span>"+
+                                      "</button>"+
+                                  "</div>"+
+                                "</div>"+
+                                "<div class='uk-margin'>"+
+                                  "<div uk-form-custom='target: > * > span:first-child'>"+
+                                        "<select name='local' required>"+
+                                          "<option value=''>Add. local...</option>"+
+                                          "<option value='sala 1'>Sala 1</option>"+
+                                          "<option value='sala 2'>Sala 2</option>"+
+                                          "<option value='sala 3'>Sala 3</option>"+
+                                          "<option value='launcher'>Launcher</option>"+
+                                        "</select>"+
+                                      "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
+                                          "<span></span>"+
+                                      "</button>"+
+                                  "</div>"+
+                                "</div>"+
+                                "<div class='uk-margin' action='' method='post'>"+
+                                    "<div class='uk-inline'>"+
+                                        "<a class='uk-form-icon' href='#'><i class='far fa-edit'></i></a>"+
+                                        "<input class='uk-input' type='text' name='descricao' placeholder='Adicionar descrição...'>"+
+                                    "</div>"+
+                                "</div>"+
+                                "<div class='uk-margin'>"+
+                                  "<div uk-form-custom='target: > * > span:first-child'>"+
+                                        "<select name='equipamento' required>"+
+                                          "<option value=''>Add. equipamento</option>"+
+                                          "<option value='monitor'>Monitor</option>"+
+                                          "<option value='notebook 1'>Notebook 1</option>"+
+                                          "<option value='notebook 2'>Notebook 2</option>"+
+                                          "<option value='microfone'>Microfone</option>"+
+                                        "</select>"+
+                                      "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
+                                          "<span></span>"+
+                                      "</button>"+
+                                  "</div>"+
+                                "</div>"+
+                                "<div class='uk-margin'>"+
+                                  "<input type='hidden' name='start_date' value='"+start_date+"' >"+
+                                  "<input type='hidden' name='end_date' value='"+end_date+"' >"+
+                                  "<input type='hidden' name='color'>"+
+                                  "<input type='hidden' name='hora_criacao' value='"+hora_criacao+"' >"+
+                                "</div>"+
+                                "<div class='uk-margin uk-grid-small uk-child-width-auto uk-grid'>"+        
+                                  "<label><input class='uk-checkbox' type='checkbox' name='privado' value='1'>Privado</label>"+
+                                "</div>"+
+                                "<button class='uk-button uk-button-default'>Salvar</button>"+
+                  "</form>",
+                showConfirmButton: false
+            })
+
+          })()
         }
-        // (async () => {
-
-        //   const { value: agendar } = await Swal.fire({
-        //     html:
-        //       "<form id='agenda' method='get' action='/AdicionarEvento'>"+
-        //         "<div class='uk-margin' action='' method='post'>"+
-        //           "<div class='uk-inline'>"+
-        //             "<a class='uk-form-icon' href='#'><i class='far fa-edit'></i></a>"+
-        //             "<input class='uk-input' type='text' name='titulo' placeholder='Adicionar título...'>"+
-        //           "</div>"+
-        //         "</div>"+
-        //                       "<div class='uk-margin'>"+
-        //                         "<div uk-form-custom='target: > * > span:first-child'>"+
-        //                             "<select name='evento' required>"+
-        //                               "<option value=''>Add. o evento...</option>"+
-        //                               "<option value='mentoria'>Mentoria</option>"+
-        //                               "<option value='eventos'>Eventos</option>"+
-        //                               "<option value='cursos'>Cursos</option>"+
-        //                               "<option value='oficinas'>Oficinas</option>"+
-        //                               "<option value='reunioes'>Reuniões</option>"+
-        //                             "</select>"+
-        //                             "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
-        //                                 "<span></span>"+
-        //                             "</button>"+
-        //                         "</div>"+
-        //                       "</div>"+
-        //                       "<div class='uk-margin'>"+
-        //                         "<div uk-form-custom='target: > * > span:first-child'>"+
-        //                               "<select name='mentor' required>"+
-        //                                 "<option value=''>Add. mentor...</option>"+
-        //                                 "<option value='Luiz Eduardo'>Luiz Eduardo</option>"+
-        //                                 "<option value='Maruska'>Maruska</option>"+
-        //                                 "<option value='Marina'>Marina Lecas</option>"+
-        //                                 "<option value='Diego'>Diego Saulo</option>"+
-        //                               "</select>"+
-        //                             "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
-        //                                 "<span></span>"+
-        //                             "</button>"+
-        //                         "</div>"+
-        //                       "</div>"+
-        //                       "<div class='uk-margin'>"+
-        //                         "<div uk-form-custom='target: > * > span:first-child'>"+
-        //                               "<select name='local' required>"+
-        //                                 "<option value=''>Add. local...</option>"+
-        //                                 "<option value='sala 1'>Sala 1</option>"+
-        //                                 "<option value='sala 2'>Sala 2</option>"+
-        //                                 "<option value='sala 3'>Sala 3</option>"+
-        //                                 "<option value='launcher'>Launcher</option>"+
-        //                               "</select>"+
-        //                             "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
-        //                                 "<span></span>"+
-        //                             "</button>"+
-        //                         "</div>"+
-        //                       "</div>"+
-        //                       "<div class='uk-margin' action='' method='post'>"+
-        //                           "<div class='uk-inline'>"+
-        //                               "<a class='uk-form-icon' href='#'><i class='far fa-edit'></i></a>"+
-        //                               "<input class='uk-input' type='text' name='descricao' placeholder='Adicionar descrição...'>"+
-        //                           "</div>"+
-        //                       "</div>"+
-        //                       "<div class='uk-margin'>"+
-        //                         "<div uk-form-custom='target: > * > span:first-child'>"+
-        //                               "<select name='equipamento' required>"+
-        //                                 "<option value=''>Add. equipamento</option>"+
-        //                                 "<option value='monitor'>Monitor</option>"+
-        //                                 "<option value='notebook 1'>Notebook 1</option>"+
-        //                                 "<option value='notebook 2'>Notebook 2</option>"+
-        //                                 "<option value='microfone'>Microfone</option>"+
-        //                               "</select>"+
-        //                             "<button class='uk-button uk-button-default' type='button' tabindex='-1'>"+
-        //                                 "<span></span>"+
-        //                             "</button>"+
-        //                         "</div>"+
-        //                       "</div>"+
-        //                       "<div class='uk-margin'>"+
-        //                         "<input type='hidden' name='start_date' value='"+info.startStr+"' >"+
-        //                         "<input type='hidden' name='end_date' value='"+info.endStr+"' >"+
-        //                         "<input type='hidden' name='color'>"+
-        //                         "<input type='hidden' name='hora_criacao' value='"+hora_criacao+"' >"+
-        //                       "</div>"+
-        //                       "<div class='uk-margin uk-grid-small uk-child-width-auto uk-grid'>"+        
-        //                         "<label><input class='uk-checkbox' type='checkbox' name='privado' value='1'>Privado</label>"+
-        //                       "</div>"+
-        //                       "<button class='uk-button uk-button-default'>Salvar</button>"+
-        //         "</form>",
-        //       showConfirmButton: false
-        //   })
-
-        // })()
        
       }
   });
