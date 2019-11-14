@@ -67,14 +67,5 @@ Route::get('/Agenda', 'AgendaController@index')->name('agendaShow');
 Route::get('/AdicionarEvento', 'AgendaController@insert');
 Route::post('/AtualizarEvento/{id}', 'AgendaController@update')->name('AtualizarEvento');
 Route::get('/RemoverEvento/{id}', 'AgendaController@remove');
-Route::post('/Agenda', function(){
-    $a = Input::get('search_agenda');
-    if($a != ' '){
-        $agenda = Agenda::where('evento', 'LIKE' ,'%'.$a.'%')->get();
-        if(count($agenda) >= 1 ){
-            return view('agenda.index', compact('agenda'));
-        }
-        
-    }
-    return view('agenda.index');
-});
+Route::post('/SearchAgenda', 'AgendaController@searchAgenda');
+

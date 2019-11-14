@@ -10,7 +10,8 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://kit.fontawesome.com/3795336791.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.all.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
 
     <!-- Fonts -->
@@ -18,6 +19,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
 
@@ -205,10 +207,6 @@
                                 <input type='hidden' name='end_date' value='{{$gen->end_date}}' >
                                 <input type='hidden' name='color' value='{{$gen->color}}'>
                               </div>
-                              <!-- <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                                <label><input class="uk-radio" type="radio" name="radio2" checked> A</label>
-                                <label><input class="uk-radio" type="radio" name="radio2"> B</label>
-                              </div>   -->
                               <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                                   @if($gen->privado)
                                     <label><input class="uk-checkbox" type="checkbox" name='privado' value='1' checked>Privado</label>
@@ -247,21 +245,13 @@
                     <div class="uk-margin">
                         <div class="uk-inline">
                             <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: search"></a>
-                            <input class="uk-input" type="search" placeholder='Em desenvolvimento'>
+                            <input class="uk-input" type="text" name='search_agenda' id='search_agenda' placeholder='Em desenvolvimento'>
                         </div>
                     </div>
                 </form>
 
-                <div class='uk-panel uk-panel-scrollable' style='position: relative; resize: none; height: 400px; width: 210px;'>
-                    @foreach($agenda as $gen => $value)
-                      <div class="uk-margin">    
-                        <div class="uk-card agenda-eventos uk-card-default uk-card-body uk-card-small">
-                          <span class='agenda-cor-evento uk-position-top-left' style='background-color: {{$value->color}};'></span>
-                          <span id='#desc{{$value->id}}' uk-toggle="target: #offcanvas-flip{{$value->id}}" class='agenda-mais-evento uk-position-top-right'><i class="fas fa-ellipsis-h"></i></span>
-                            {{$value->titulo}}
-                        </div>
-                      </div>
-                    @endforeach
+                <div id='eventos_listados' class='uk-panel uk-panel-scrollable' style='position: relative; resize: none; height: 400px; width: 210px;'>
+                    <!-- Aqui a lista dos eventos da agenda -->
                 </div>
             </div>
           </ul>
@@ -322,10 +312,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var end_date = event.end;
         end_date = moment(end_date).format('YYYY/MM/DD');
         if(start_date < today){
-            // var cellClic = moment(start_date).format('YYYY-MM-DD');
-            // $('.fc-day[data-date="' + cellClic + '"]').mouseover(function(){
-            //   $(this).css('background', 'red');
-            // });
+           return false;
         }else{
           (async () => {
 
@@ -428,5 +415,28 @@ function removerEvento(id){
 function pesquisaAgenda(){
     document.forms['formSearchAgenda'].submit();
 }
+</script>
+<script>
+$(document).ready(function(){
+  search_agenda();
+
+  function search_agenda(query = ''){
+    $.ajax({
+      url: "/SearchAgenda",
+      method: 'GET',
+      data:{query:query},
+      dataType: 'json'
+      success:function(data){
+        $('#eventos_listados').html(data.table_data);
+      }
+    })
+  }
+
+  $(document).on('keyup', '#search_agenda', function(){
+    var query = $(this).val();
+    search_agenda(query);
+  });
+  
+});
 </script>
 </html>
