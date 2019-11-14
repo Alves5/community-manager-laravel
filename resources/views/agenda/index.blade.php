@@ -307,26 +307,25 @@ document.addEventListener('DOMContentLoaded', function() {
             }
           ?>
       ],
-      select: function(event, cell) {
+      select: function(event) {
         var data = new Date();
         var hora = data.getHours();   // 0-23
         var min  = data.getMinutes(); // 0-59
         var seg  = data.getSeconds();
         var hora_criacao = hora + ':' + min + ':' + seg;
 
-        var mesAtual = data.getMonth()+1;
-        var mesClicado = event.start.getMonth()+1;
-
         var today = moment(data).format('YYYY/MM/DD');
 
         var start_date = event.start;
+        var diaClicado = event.start.getDate();
         start_date = moment(start_date).format('YYYY/MM/DD');
         var end_date = event.end;
         end_date = moment(end_date).format('YYYY/MM/DD');
-        if(mesClicado < mesAtual || start_date < today){
-            //$(".fc-day").css("background", "red");
-            //Procurar atributo de cor de fundo
-            return false;
+        if(start_date < today){
+            // var cellClic = moment(start_date).format('YYYY-MM-DD');
+            // $('.fc-day[data-date="' + cellClic + '"]').mouseover(function(){
+            //   $(this).css('background', 'red');
+            // });
         }else{
           (async () => {
 
@@ -418,7 +417,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
           })()
         }
-       
       }
   });
   calendar.render();
