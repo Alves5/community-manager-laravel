@@ -241,16 +241,16 @@
             <!-- <li class="uk-nav-header"></li>
             <li class="uk-nav-divider"></li> -->
               <div class='uk-width-expand@m'>
-                <form>
+                <form id='formSearA'>
                     <div class="uk-margin">
                         <div class="uk-inline">
                             <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: search"></a>
-                            <input class="uk-input" type="text" name='search_agenda' id='search_agenda' placeholder='Em desenvolvimento'>
+                            <input class="uk-input" type="search" name='searchAgenda' id='search_agenda' placeholder='Em desenvolvimento'>
                         </div>
                     </div>
                 </form>
 
-                <div id='eventos_listados' class='uk-panel uk-panel-scrollable' style='position: relative; resize: none; height: 400px; width: 210px;'>
+                <div id='eventosList' class='uk-panel uk-panel-scrollable' style='position: relative; resize: none; height: 400px; width: 210px;'>
                     <!-- Aqui a lista dos eventos da agenda -->
                 </div>
             </div>
@@ -415,28 +415,5 @@ function removerEvento(id){
 function pesquisaAgenda(){
     document.forms['formSearchAgenda'].submit();
 }
-</script>
-<script>
-$(document).ready(function(){
-  search_agenda();
-
-  function search_agenda(query = ''){
-    $.ajax({
-      url: "/SearchAgenda",
-      method: 'GET',
-      data:{query:query},
-      dataType: 'json'
-      success:function(data){
-        $('#eventos_listados').html(data.table_data);
-      }
-    })
-  }
-
-  $(document).on('keyup', '#search_agenda', function(){
-    var query = $(this).val();
-    search_agenda(query);
-  });
-  
-});
 </script>
 </html>

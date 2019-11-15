@@ -12,7 +12,6 @@
 */
 Use Illuminate\Support\Facades\Input;
 Use App\Edital;
-use App\Agenda;
 
 Route::get('/', function () {
     return view('welcome');
@@ -67,5 +66,5 @@ Route::get('/Agenda', 'AgendaController@index')->name('agendaShow');
 Route::get('/AdicionarEvento', 'AgendaController@insert');
 Route::post('/AtualizarEvento/{id}', 'AgendaController@update')->name('AtualizarEvento');
 Route::get('/RemoverEvento/{id}', 'AgendaController@remove');
-Route::post('/SearchAgenda', 'AgendaController@searchAgenda');
+// Route::post('/GetSearch', 'AgendaController@getSearch')->name('post');
 
