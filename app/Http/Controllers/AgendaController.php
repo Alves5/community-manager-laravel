@@ -52,6 +52,8 @@ class AgendaController extends Controller
             'local' => 'required',
             'descricao' => 'required',
             'equipamento' => 'required',
+            'startEdit' => 'required',
+            'endEdit' => 'required'
         ]);
 
         $data = $request->all();

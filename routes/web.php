@@ -68,3 +68,6 @@ Route::post('/AtualizarEvento/{id}', 'AgendaController@update')->name('Atualizar
 Route::get('/RemoverEvento/{id}', 'AgendaController@remove');
 // Route::post('/GetSearch', 'AgendaController@getSearch')->name('post');
 
+Route::get('/Datepicker', function(){
+    return view('agenda.datepicker');
+});
