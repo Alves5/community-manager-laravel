@@ -12,6 +12,7 @@
 */
 Use Illuminate\Support\Facades\Input;
 Use App\Edital;
+Use App\Agenda;
 
 Route::get('/', function () {
     return view('welcome');
@@ -66,8 +67,24 @@ Route::get('/Agenda', 'AgendaController@index')->name('agendaShow');
 Route::get('/AdicionarEvento', 'AgendaController@insert');
 Route::post('/AtualizarEvento/{id}', 'AgendaController@update')->name('AtualizarEvento');
 Route::get('/RemoverEvento/{id}', 'AgendaController@remove');
-// Route::post('/GetSearch', 'AgendaController@getSearch')->name('post');
+Route::post('/Agenda', function(){
+    $q = Input::get('searchAgenda');
+    if($q != ' '){
+        $agenda = Agenda::where('titulo','LIKE' ,'%'.$q.'%')
+                        ->orWhere('evento','LIKE' ,'%'.$q.'%')
+                        ->orWhere('mentor','LIKE' ,'%'.$q.'%')
+                        ->orWhere('local','LIKE' ,'%'.$q.'%')
+                        ->orWhere('descricao','LIKE' ,'%'.$q.'%')
+                        ->orWhere('equipamento','LIKE' ,'%'.$q.'%')->get();
+        if(count($agenda) >= 1 ){
+            return view('agenda.index', compact('agenda'));
+        }
+    }
+    $agenda = Agenda::all();
+    return view('agenda.index', compact('agenda'));
+});
 
+//Rota para o arquivo agenda/datepicker
 Route::get('/Datepicker', function(){
     return view('agenda.datepicker');
 });

@@ -51,9 +51,7 @@ class AgendaController extends Controller
             'mentor' => 'required',
             'local' => 'required',
             'descricao' => 'required',
-            'equipamento' => 'required',
-            'startEdit' => 'required',
-            'endEdit' => 'required'
+            'equipamento' => 'required'
         ]);
 
         $data = $request->all();
@@ -79,7 +77,7 @@ class AgendaController extends Controller
         }else{
             $data['privado'] = 1;
         }
-
+        
         $agenda = Agenda::find($id);
         $agenda->titulo = $data['titulo'];
         $agenda->evento = $data['evento'];
