@@ -83,8 +83,3 @@ Route::post('/Agenda', function(){
     $agenda = Agenda::all();
     return view('agenda.index', compact('agenda'));
 });
-
-//Rota para o arquivo agenda/datepicker
-Route::get('/Datepicker', function(){
-    return view('agenda.datepicker');
-});

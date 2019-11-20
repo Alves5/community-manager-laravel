@@ -36,9 +36,6 @@
 
     <link rel="stylesheet" href="{{ asset('css/fullCalendar/datepicker.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
-  <!-- DatePicker -->
-  <script src="{{ asset('js/fullCalendar/datepicker.min.js')}}"></script>
-    <script src="{{ asset('js/fullCalendar/datepicker.pt-BR.js')}}"></script>
     <style>
     /* CSS da página da agenda */
       #agenda{
@@ -126,7 +123,7 @@
               <li>
                 <a class="uk-accordion-title" href="#">Atualizar</a>
                 <div class="uk-accordion-content">
-                            <form action="{{ route('AtualizarEvento', $gen->id) }}" method='post'>
+                            <form action="{{ route('AtualizarEvento', $gen->id) }}" method='post' name='formEditarEvento'>
                               @csrf
                               <div class="uk-margin" action='' method='post'>
                                   <div class="uk-inline">
@@ -259,7 +256,7 @@
                 <div id='eventosList' class='uk-panel uk-panel-scrollable' style='position: relative; resize: none; height: 400px; width: 210px;'>
                     @foreach($agenda as $gen => $value)
                       <div class="uk-margin">    
-                        <div class="uk-card agenda-eventos uk-card-default uk-card-body uk-card-small">
+                        <div id='listaAgenda' class="uk-card agenda-eventos uk-card-default uk-card-body uk-card-small">
                           <span class='agenda-cor-evento uk-position-top-left' style='background-color: {{$value->color}};'></span>
                           <span id='#desc{{$value->id}}' uk-toggle="target: #offcanvas-flip{{$value->id}}" class='agenda-mais-evento uk-position-top-right'><i class="fas fa-ellipsis-h"></i></span>
                             {{$value->titulo}}
@@ -430,9 +427,7 @@ function pesquisaAgenda(){
     document.forms['formAgendasearch'].submit();
 }
 
-//Datas que serão editadas
 document.getElementById('start_date').min = new Date().toISOString().split("T")[0];
 document.getElementById('end_date').min = new Date().toISOString().split("T")[0];
-
 </script>
 </html>
