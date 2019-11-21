@@ -6,18 +6,14 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\User;
 
-class welcome extends Mailable
+class NovoAcesso extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    private $user;
-    public function __construct($user)
+    protected $user;
+    public function __construct(User $user)
     {
         $this->user = $user;
     }
@@ -29,7 +25,10 @@ class welcome extends Mailable
      */
     public function build()
     {
-        $data = $this->user;
-        return $this->view('email.welcome', compact('data'));
+        return $this->view('email.novoAcesso')->with([
+            'nome' => $this->user->name,
+            'email' => $this->user->email,
+            'datahora' => now()->setTimezone('America/Sao_Paulo')->format('d-m-Y H:i:s')
+        ]);
     }
 }

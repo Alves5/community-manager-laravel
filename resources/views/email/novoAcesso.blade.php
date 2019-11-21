@@ -9,14 +9,20 @@
 <body>
     <table>
         <tr>
-            <td>Hi {{$data->name}}</td>
+            <td>Hi {{$nome}}</td>
         </tr>
         <tr>
             <td>--------------</td>
         </tr>
         <tr>
-            <td>sahfdaifhasdiofhadsifhdsaihfdasi</td>
+            <td>E-mail: {{$email}}</td>
+        </tr>
+        <tr>
+            <td>Horário: {{$datahora}}</td>
         </tr>
     </table>
+    <div>
+        <img width='10%' height='10%' src="{{ $message->embed( public_path() . '/image/logo-laravel.png' ) }}" alt="">
+    </div>
 </body>
 </html>
