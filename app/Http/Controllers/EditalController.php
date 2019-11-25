@@ -24,6 +24,17 @@ class EditalController extends Controller
         return back();
     }
 
+    public function insertLike(Request $request, $id){
+       $edital = Edital::find($id);
+       if($request->get('like') == 1){
+            $edital->like = $edital->like + 1;
+       }else{
+        $edital->like = $edital->like - 1;
+       }
+        $edital->save();
+        return back();
+    }
+
     public function detailEdital($id){
         $edital = Edital::find($id);
         return view('edital.detail', compact('edital'));

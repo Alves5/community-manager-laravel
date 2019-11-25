@@ -429,5 +429,6 @@ function pesquisaAgenda(){
 
 document.getElementById('start_date').min = new Date().toISOString().split("T")[0];
 document.getElementById('end_date').min = new Date().toISOString().split("T")[0];
+
 </script>
 </html>

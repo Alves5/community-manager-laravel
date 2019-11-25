@@ -18,6 +18,7 @@ class CreateEditalsTable extends Migration
             $table->string('titulo');
             $table->string('descricao');
             $table->string('link');
+            $table->integer('like')->default(0);
             $table->timestamps();
         });
     }

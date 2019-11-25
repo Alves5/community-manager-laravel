@@ -78,11 +78,20 @@
         <div class='row'>
             
             @foreach($edital as $edi)
-                <div onclick='detailEdital({{$edi->id}});' class='card-group edital-card mx-auto'>
+                <div class='card-group edital-card mx-auto'>
                     <div class="card">
-                        <img src="{{asset('image/edital-default.png')}}" class="card-img-top">
+                        <img onclick='detailEdital({{$edi->id}});' src="{{asset('image/edital-default.png')}}" class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title">{{$edi->titulo}}</h5>
+                            @if($edi->like == 0)
+                                <form action="{{route('EnviarLike', $edi->id)}}" method="get">
+                                    <button name='like' value='1'>Like</button>
+                                </form>
+                            @else
+                                <form action="{{route('EnviarLike', $edi->id)}}" method="get">
+                                    <button name='like' value='0'>Deslike</button>
+                                </form>
+                            @endif
                             <small>{{$edi->created_at}}</small>
                         </div>
                     </div>
