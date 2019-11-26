@@ -42,6 +42,10 @@
                             <i class="fas fa-calendar-alt"></i>
                             <a href="{{route('agendaShow')}}">Agenda</a>
                         </div>
+                        <div>
+                            <i class="far fa-newspaper"></i>
+                            <a href="{{route('Post')}}">Post</a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEditalsTable extends Migration
+class CreateLikesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateEditalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('editals', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('titulo');
-            $table->string('descricao');
-            $table->string('link');
             $table->timestamps();
+            $table->integer('user_id');
+            $table->integer('post_id');
+            $table->boolean('like');
         });
     }
 
@@ -29,6 +29,6 @@ class CreateEditalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('editals');
+        Schema::dropIfExists('likes');
     }
 }

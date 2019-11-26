@@ -84,5 +84,7 @@ Route::post('/Agenda', function(){
     return view('agenda.index', compact('agenda'));
 });
 
-//Rotas para testes com a Jornada
-Route::get('/EnviarLike/{id}', 'EditalController@insertLike')->name('EnviarLike');
+
+//Rotas para testes de Like e Deslike
+Route::get('/Post', 'PostController@index')->name('Post');
+Route::post('/Like', 'PostController@likePost')->name('Like');
